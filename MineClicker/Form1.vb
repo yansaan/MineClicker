@@ -8,7 +8,8 @@ Public Class Form1
 
     Declare Sub mouse_event Lib "user32" Alias "mouse_event" (ByVal dwFlags As Long, ByVal dx As Long, ByVal dy As Long, ByVal cButtons As Long, ByVal dwExtraInfo As Long)
 
-    ReadOnly keyPush As Integer = 117
+    ReadOnly keyPush As Integer = My.Settings.KeyPush
+    ReadOnly CombPush As Integer = My.Settings.Combination
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboLongClick.Items.Add("Stone Pickaxe")
         ComboLongClick.Items.Add("Iron Pickaxe")
@@ -69,7 +70,7 @@ Public Class Form1
         FrmAbout.ShowDialog()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
 
     End Sub
 End Class

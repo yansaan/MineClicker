@@ -43,7 +43,7 @@ Partial Class FrmAbout
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FrmAbout"
-        Me.Text = "FrmAbout"
+        Me.Text = "About"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

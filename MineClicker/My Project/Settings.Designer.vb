@@ -55,13 +55,62 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property KeyPush() As Char
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("117")>  _
+        Public Property KeyPush() As Integer
             Get
-                Return CType(Me("KeyPush"),Char)
+                Return CType(Me("KeyPush"),Integer)
             End Get
             Set
                 Me("KeyPush") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property Combination() As Integer
+            Get
+                Return CType(Me("Combination"),Integer)
+            End Get
+            Set
+                Me("Combination") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CombEnable() As Boolean
+            Get
+                Return CType(Me("CombEnable"),Boolean)
+            End Get
+            Set
+                Me("CombEnable") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("F6")>  _
+        Public Property KeyString() As String
+            Get
+                Return CType(Me("KeyString"),String)
+            End Get
+            Set
+                Me("KeyString") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property combString() As String
+            Get
+                Return CType(Me("combString"),String)
+            End Get
+            Set
+                Me("combString") = value
             End Set
         End Property
     End Class
