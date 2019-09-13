@@ -49,6 +49,7 @@ Partial Class Form1
         Me.TimerFishing = New System.Windows.Forms.Timer(Me.components)
         Me.RunningKey = New System.Windows.Forms.Timer(Me.components)
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.OutsideForms = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
@@ -122,22 +123,22 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(6, 147)
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(6, 145)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(91, 9)
+        Me.Label8.Size = New System.Drawing.Size(126, 12)
         Me.Label8.TabIndex = 4
-        Me.Label8.Text = "1000 = 1 second, Min 400"
+        Me.Label8.Text = "1000 = 1 second, Minimal 400"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(6, 56)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(6, 54)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(93, 9)
+        Me.Label4.Size = New System.Drawing.Size(126, 12)
         Me.Label4.TabIndex = 4
-        Me.Label4.Text = "1000 = 1 second, Min. 200"
+        Me.Label4.Text = "1000 = 1 second, Minimal 200"
         '
         'ComboLongClick
         '
@@ -153,6 +154,7 @@ Partial Class Form1
         '
         Me.TxtLong.Enabled = False
         Me.TxtLong.Location = New System.Drawing.Point(9, 124)
+        Me.TxtLong.MaxLength = 9
         Me.TxtLong.Name = "TxtLong"
         Me.TxtLong.Size = New System.Drawing.Size(71, 20)
         Me.TxtLong.TabIndex = 2
@@ -162,6 +164,7 @@ Partial Class Form1
         '
         Me.TxtRepeat.Enabled = False
         Me.TxtRepeat.Location = New System.Drawing.Point(9, 185)
+        Me.TxtRepeat.MaxLength = 10
         Me.TxtRepeat.Name = "TxtRepeat"
         Me.TxtRepeat.Size = New System.Drawing.Size(76, 20)
         Me.TxtRepeat.TabIndex = 2
@@ -170,6 +173,7 @@ Partial Class Form1
         'TxtDelay
         '
         Me.TxtDelay.Location = New System.Drawing.Point(9, 33)
+        Me.TxtDelay.MaxLength = 9
         Me.TxtDelay.Name = "TxtDelay"
         Me.TxtDelay.Size = New System.Drawing.Size(76, 20)
         Me.TxtDelay.TabIndex = 2
@@ -259,6 +263,7 @@ Partial Class Form1
         '
         'TimerFishing
         '
+        Me.TimerFishing.Interval = 1000
         '
         'RunningKey
         '
@@ -270,16 +275,20 @@ Partial Class Form1
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label7.Location = New System.Drawing.Point(12, 358)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(173, 23)
+        Me.Label7.Size = New System.Drawing.Size(205, 39)
         Me.Label7.TabIndex = 6
         Me.Label7.Text = "Press ""F6"" for play and Stop"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'OutsideForms
+        '
+        Me.OutsideForms.Enabled = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(230, 386)
+        Me.ClientSize = New System.Drawing.Size(230, 406)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
@@ -326,4 +335,5 @@ Partial Class Form1
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents TxtDelay As TextBox
+    Friend WithEvents OutsideForms As Timer
 End Class

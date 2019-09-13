@@ -13,6 +13,8 @@
     Dim combInput As String = My.Settings.combString
     Dim combLong As Boolean = False
     Private Sub FormSettings_Load(sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Form1.OpenAnotherForm = True
+
         If comb = False Then
             keyResult = KeyInput.ToString()
             Label2.Text = My.Settings.KeyPush.ToString
@@ -44,13 +46,14 @@
 
     Private Sub SavePress(ByVal o As Object, ByVal e As KeyEventArgs)
         e.SuppressKeyPress = True
+        If e.KeyValue.ToString = "9" Or e.KeyValue.ToString = "13" Then
 
-        If e.KeyValue.ToString = "20" Or
-            e.KeyValue.ToString = "144" Or
-            e.KeyValue.ToString = "91" Or
-            e.KeyValue.ToString = "9" Or
-            e.KeyValue.ToString = "93" Or
-            e.KeyValue.ToString = "44" Then
+        ElseIf e.KeyValue.ToString = "20" Or
+        e.KeyValue.ToString = "144" Or
+        e.KeyValue.ToString = "91" Or
+        e.KeyValue.ToString = "93" Or
+        e.KeyValue.ToString = "44" Or
+        (e.KeyCode >= Keys.NumPad0 And e.KeyCode <= Keys.NumPad9) Then
             Label1.Text = "This input not support"
 
         ElseIf e.KeyValue.ToString = "27" Then
@@ -155,10 +158,6 @@
 
     End Sub
 
-    Private Sub FormSettings_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        Form1.RunningKey.Enabled = True
-    End Sub
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim ResetSetting As MsgBoxResult = MsgBox("", vbYesNo + vbQuestion, "Reseting")
         If ResetSetting = vbYes Then
@@ -167,5 +166,9 @@
             Label2.Text = My.Settings.KeyPush.ToString
 
         End If
+    End Sub
+
+    Private Sub FormSettings_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        Form1.OpenAnotherForm = False
     End Sub
 End Class

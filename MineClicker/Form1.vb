@@ -9,7 +9,11 @@ Public Class Form1
     Declare Sub mouse_event Lib "user32" Alias "mouse_event" (ByVal dwFlags As Long, ByVal dx As Long, ByVal dy As Long, ByVal cButtons As Long, ByVal dwExtraInfo As Long)
 
     ReadOnly keyPush As Integer = My.Settings.KeyPush
-    ReadOnly CombPush As Integer = My.Settings.Combination
+    Private ReadOnly CombPush As Integer = My.Settings.Combination
+
+    Dim RunClick As Boolean = False
+    Public OpenAnotherForm As Boolean = False
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboLongClick.Items.Add("Stone Pickaxe")
         ComboLongClick.Items.Add("Iron Pickaxe")
@@ -47,6 +51,18 @@ Public Class Form1
     End Sub
 
     Private Sub RunningKey_Tick(sender As Object, e As EventArgs) Handles RunningKey.Tick
+        If (TxtDelay.Text >= 200) Then
+            Label7.Text = "Press (F6) for play and Stop"
+            TimerFishing.Interval = TxtDelay.Text
+            If RunClick = True Then
+                Runing()
+            End If
+        Else
+            Label7.Text = "AutoClick not running when setting to minimal"
+        End If
+    End Sub
+
+    Private Sub Runing()
         If (GetAsyncKeyState(keyPush) And KeyDownBit) = KeyDownBit Then
             While GetAsyncKeyState(keyPush)
             End While
@@ -58,13 +74,8 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub TxtDelay_TextChanged(sender As Object, e As EventArgs) Handles TxtDelay.TextChanged
-        TimerFishing.Interval = TxtDelay.Text
-    End Sub
-
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
         FormSettings.ShowDialog()
-        RunningKey.Enabled = False
     End Sub
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
         FrmAbout.ShowDialog()
@@ -72,5 +83,21 @@ Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
 
+    End Sub
+
+    Private Sub TxtDelay_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtDelay.KeyPress
+        If Not Char.IsDigit(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub Form1_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        RunClick = False
+    End Sub
+
+    Private Sub Form1_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
+        If OpenAnotherForm = False Then
+            RunClick = True
+        End If
     End Sub
 End Class
