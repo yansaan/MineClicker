@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("ardIANsyah")>
 <Assembly: AssemblyProduct("MineCliker")>
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2019")>
+<Assembly: AssemblyCopyright("Copyright © ardIANsyah 2019")>
 <Assembly: AssemblyTrademark("Ian Ardiansyah")>
 
 <Assembly: ComVisible(False)>
@@ -32,4 +32,4 @@ Imports System.Runtime.InteropServices
 ' <Assembly: AssemblyVersion("1.0.*")>
 
 <Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("0.3.0.0")>
+<Assembly: AssemblyFileVersion("0.5.0.0")>
