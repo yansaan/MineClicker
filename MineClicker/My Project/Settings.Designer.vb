@@ -113,6 +113,18 @@ Namespace My
                 Me("combString") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1000")>  _
+        Public Property TimeDelay() As Integer
+            Get
+                Return CType(Me("TimeDelay"),Integer)
+            End Get
+            Set
+                Me("TimeDelay") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

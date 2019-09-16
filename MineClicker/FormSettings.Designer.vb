@@ -28,6 +28,7 @@ Partial Class FormSettings
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -43,7 +44,6 @@ Partial Class FormSettings
         '
         'Button1
         '
-        Me.Button1.Enabled = False
         Me.Button1.Location = New System.Drawing.Point(185, 12)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(54, 23)
@@ -91,11 +91,22 @@ Partial Class FormSettings
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Label2"
         '
+        'Label3
+        '
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(10, 87)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(296, 32)
+        Me.Label3.TabIndex = 6
+        Me.Label3.Text = "To get a key combination, press CTRL / ALT / SHIFT and release before pressing an" &
+    "other key, press ESC to cancel it"
+        '
         'FormSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(314, 93)
+        Me.ClientSize = New System.Drawing.Size(314, 116)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Button2)
@@ -118,4 +129,5 @@ Partial Class FormSettings
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
 End Class

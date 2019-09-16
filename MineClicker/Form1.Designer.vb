@@ -277,7 +277,6 @@ Partial Class Form1
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(205, 39)
         Me.Label7.TabIndex = 6
-        Me.Label7.Text = "Press ""F6"" for play and Stop"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'OutsideForms

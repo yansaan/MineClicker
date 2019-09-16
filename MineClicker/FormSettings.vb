@@ -30,20 +30,6 @@
         AddHandler Me.KeyUp, AddressOf SavePress
     End Sub
 
-    Private Sub DisableKey(sender As Object, e As KeyEventArgs)
-        e.SuppressKeyPress = True
-
-        If (e.KeyValue.ToString = "16" Or
-            e.KeyValue.ToString = "17" Or
-            e.KeyValue.ToString = "18") And KeysData = 0 Then
-            keyComb = 0
-            KeysData = Savedkey
-            combLong = False
-
-            LabelPress.Text = keyResult
-        End If
-    End Sub
-
     Private Sub SavePress(ByVal o As Object, ByVal e As KeyEventArgs)
         e.SuppressKeyPress = True
         If e.KeyValue.ToString = "9" Or e.KeyValue.ToString = "13" Then
@@ -132,6 +118,8 @@
                 keyComb = 0
                 keyCombSaved = 0
                 comb = False
+
+                combInput = ""
                 keyResult = KeyInput + " / " + KeysData.ToString
             Else
                 keyCombSaved = keyComb
@@ -170,5 +158,20 @@
 
     Private Sub FormSettings_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         Form1.OpenAnotherForm = False
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        My.Settings.CombEnable = comb
+
+        If comb = False Then
+            My.Settings.Combination = 0
+            My.Settings.combString = ""
+        Else
+            My.Settings.Combination = keyComb
+            My.Settings.combString = combInput
+        End If
+
+        My.Settings.KeyPush = KeysData
+        My.Settings.KeyString = KeyInput
     End Sub
 End Class

@@ -8,8 +8,11 @@ Public Class Form1
 
     Declare Sub mouse_event Lib "user32" Alias "mouse_event" (ByVal dwFlags As Long, ByVal dx As Long, ByVal dy As Long, ByVal cButtons As Long, ByVal dwExtraInfo As Long)
 
-    ReadOnly keyPush As Integer = My.Settings.KeyPush
-    Private ReadOnly CombPush As Integer = My.Settings.Combination
+    Private keyPush As Integer
+    Dim KeysString As String
+
+    Private comb As Boolean
+    Private CombPush As Integer
 
     Dim RunClick As Boolean = False
     Public OpenAnotherForm As Boolean = False
@@ -20,6 +23,8 @@ Public Class Form1
         ComboLongClick.Items.Add("Diamond Pickaxe")
         ComboLongClick.Items.Add("Custom Time")
         ComboLongClick.Text = "Iron Pickaxe"
+
+        TxtDelay.Text = My.Settings.TimeDelay
     End Sub
 
     'Private Sub ClickFunction()
@@ -51,27 +56,59 @@ Public Class Form1
     End Sub
 
     Private Sub RunningKey_Tick(sender As Object, e As EventArgs) Handles RunningKey.Tick
-        If (TxtDelay.Text >= 200) Then
-            Label7.Text = "Press (F6) for play and Stop"
-            TimerFishing.Interval = TxtDelay.Text
-            If RunClick = True Then
-                Runing()
-            End If
+        comb = My.Settings.CombEnable
+        keyPush = My.Settings.KeyPush
+        CombPush = My.Settings.Combination
+
+        If comb = True Then
+            KeysString = My.Settings.combString + " + " + My.Settings.KeyString
         Else
-            Label7.Text = "AutoClick not running when setting to minimal"
+            KeysString = My.Settings.KeyString
+        End If
+
+
+        If TxtDelay.Text = "" Or TxtLong.Text = "" Or TxtRepeat.Text = "" Then
+            Label7.Text = "AutoClick not running but input null"
+        Else
+            If (TxtDelay.Text >= 200) Then
+                Label7.Text = " Open Minecraft, and press (" + KeysString + ") for play and Stop"
+                TimerFishing.Interval = TxtDelay.Text
+                My.Settings.TimeDelay = TxtDelay.Text
+                If RunClick = True Then
+                    Runing()
+                End If
+            Else
+                Label7.Text = "AutoClick not running when setting to minimal"
+            End If
         End If
     End Sub
 
     Private Sub Runing()
-        If (GetAsyncKeyState(keyPush) And KeyDownBit) = KeyDownBit Then
-            While GetAsyncKeyState(keyPush)
-            End While
-            If TimerFishing.Enabled = False Then
-                TimerFishing.Enabled = True
-            ElseIf TimerFishing.Enabled = True Then
-                TimerFishing.Enabled = False
+        If comb = False Then
+            If ((GetAsyncKeyState(keyPush) And KeyDownBit) = KeyDownBit) Then
+                While GetAsyncKeyState(keyPush)
+                End While
+                If TimerFishing.Enabled = False Then
+                    TimerFishing.Enabled = True
+                ElseIf TimerFishing.Enabled = True Then
+                    TimerFishing.Enabled = False
+                End If
+            End If
+        Else
+            If ((GetAsyncKeyState(keyPush) And KeyDownBit) = KeyDownBit) And ((GetAsyncKeyState(CombPush) And KeyDownBit) = KeyDownBit) Then
+                While GetAsyncKeyState(keyPush)
+                End While
+                While GetAsyncKeyState(CombPush)
+                End While
+
+                If TimerFishing.Enabled = False Then
+                    TimerFishing.Enabled = True
+                ElseIf TimerFishing.Enabled = True Then
+                    TimerFishing.Enabled = False
+                End If
             End If
         End If
+
     End Sub
 
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
@@ -81,11 +118,7 @@ Public Class Form1
         FrmAbout.ShowDialog()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub TxtDelay_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtDelay.KeyPress
+    Private Sub TxtDelay_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtDelay.KeyPress, TxtRepeat.KeyPress, TxtLong.KeyPress
         If Not Char.IsDigit(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
