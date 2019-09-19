@@ -47,7 +47,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Fishing_Rod.ico</ApplicationIcon>
+    <ApplicationIcon>Fishing_Rod~1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -140,6 +140,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fishing_Rod.ico" />
+    <Content Include="Fishing_Rod~1.ico" />
+    <None Include="Resources\icons8_facebook_208px.png" />
+    <None Include="Resources\icons8_youtube_play_480px.png" />
+    <None Include="Resources\icons8_website_512px.png" />
+    <None Include="Resources\icons8_twitter_208px.png" />
+    <None Include="Resources\icons8_patreon_480px.png" />
+    <None Include="Resources\icons8_instagram_new_480px.png" />
+    <None Include="Resources\icons8_github_512px.png" />
+    <None Include="Resources\ardiantext.png" />
+    <None Include="Resources\ardian.png" />
+    <None Include="Resources\FishGrey.ico" />
+    <None Include="Resources\Fish.ico" />
+    <None Include="Resources\Fishing_Rod.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

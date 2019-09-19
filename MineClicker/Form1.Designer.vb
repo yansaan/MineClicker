@@ -162,7 +162,6 @@ Partial Class Form1
         '
         'TxtRepeat
         '
-        Me.TxtRepeat.Enabled = False
         Me.TxtRepeat.Location = New System.Drawing.Point(9, 185)
         Me.TxtRepeat.MaxLength = 10
         Me.TxtRepeat.Name = "TxtRepeat"
@@ -252,9 +251,12 @@ Partial Class Form1
         '
         'NotifyIcon1
         '
+        Me.NotifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.NotifyIcon1.BalloonTipText = "Double click for show him"
+        Me.NotifyIcon1.BalloonTipTitle = "MineClicker is Minimized"
         Me.NotifyIcon1.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.NotifyIcon1.Text = "NotifyIcon1"
-        Me.NotifyIcon1.Visible = True
+        Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
+        Me.NotifyIcon1.Text = "MineClicker"
         '
         'ContextMenuStrip1
         '

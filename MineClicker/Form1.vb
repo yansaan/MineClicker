@@ -16,6 +16,8 @@ Public Class Form1
 
     Dim RunClick As Boolean = False
     Public OpenAnotherForm As Boolean = False
+    Dim Repeat As Integer
+    Dim repeatEnabled As Boolean
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboLongClick.Items.Add("Stone Pickaxe")
@@ -23,6 +25,8 @@ Public Class Form1
         ComboLongClick.Items.Add("Diamond Pickaxe")
         ComboLongClick.Items.Add("Custom Time")
         ComboLongClick.Text = "Iron Pickaxe"
+
+        TxtRepeat.Text = My.Settings.TimeRepeat
 
         TxtDelay.Text = My.Settings.TimeDelay
     End Sub
@@ -52,7 +56,15 @@ Public Class Form1
     End Sub
 
     Private Sub TimerFishing_Tick(sender As Object, e As EventArgs) Handles TimerFishing.Tick
+
         AFKFish()
+        If repeatEnabled = True Then
+            If Repeat = 0 Then
+                TimerFishing.Enabled = False
+            Else
+                Repeat -= 1
+            End If
+        End If
     End Sub
 
     Private Sub RunningKey_Tick(sender As Object, e As EventArgs) Handles RunningKey.Tick
@@ -66,6 +78,7 @@ Public Class Form1
             KeysString = My.Settings.KeyString
         End If
 
+        My.Settings.TimeRepeat = TxtRepeat.Text
 
         If TxtDelay.Text = "" Or TxtLong.Text = "" Or TxtRepeat.Text = "" Then
             Label7.Text = "AutoClick not running but input null"
@@ -88,11 +101,8 @@ Public Class Form1
             If ((GetAsyncKeyState(keyPush) And KeyDownBit) = KeyDownBit) Then
                 While GetAsyncKeyState(keyPush)
                 End While
-                If TimerFishing.Enabled = False Then
-                    TimerFishing.Enabled = True
-                ElseIf TimerFishing.Enabled = True Then
-                    TimerFishing.Enabled = False
-                End If
+
+                KeyEnabled()
             End If
         Else
             If ((GetAsyncKeyState(keyPush) And KeyDownBit) = KeyDownBit) And ((GetAsyncKeyState(CombPush) And KeyDownBit) = KeyDownBit) Then
@@ -101,14 +111,25 @@ Public Class Form1
                 While GetAsyncKeyState(CombPush)
                 End While
 
-                If TimerFishing.Enabled = False Then
-                    TimerFishing.Enabled = True
-                ElseIf TimerFishing.Enabled = True Then
-                    TimerFishing.Enabled = False
-                End If
+                KeyEnabled()
             End If
         End If
+    End Sub
+    Private Sub KeyEnabled()
+        If TimerFishing.Enabled = False Then
+            TimerFishing.Enabled = True
+            NotifyIcon1.Icon = My.Resources.Fish
+        ElseIf TimerFishing.Enabled = True Then
+            TimerFishing.Enabled = False
+            NotifyIcon1.Icon = My.Resources.FishGrey
+        End If
+        Repeat = TxtRepeat.Text
 
+        If Repeat > 0 Then
+            repeatEnabled = True
+        Else
+            repeatEnabled = False
+        End If
     End Sub
 
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
@@ -132,5 +153,15 @@ Public Class Form1
         If OpenAnotherForm = False Then
             RunClick = True
         End If
+        If Me.WindowState = FormWindowState.Minimized Then
+            NotifyIcon1.Visible = True
+            Me.Hide()
+        End If
+    End Sub
+
+    Private Sub NotifyIcon1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseDoubleClick
+        Me.Show()
+        NotifyIcon1.Visible = False
+        Me.WindowState = FormWindowState.Normal
     End Sub
 End Class

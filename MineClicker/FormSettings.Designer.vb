@@ -115,7 +115,7 @@ Partial Class FormSettings
         Me.KeyPreview = True
         Me.Name = "FormSettings"
         Me.ShowInTaskbar = False
-        Me.Text = "FormSettings"
+        Me.Text = "Key Settings"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
