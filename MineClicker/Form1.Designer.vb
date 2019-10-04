@@ -73,9 +73,9 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.Controls.Add(Me.BreakFunction)
         Me.GroupBox1.Controls.Add(Me.FishingFunction)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 32)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 32)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(205, 72)
+        Me.GroupBox1.Size = New System.Drawing.Size(210, 72)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Click Function"
@@ -83,7 +83,6 @@ Partial Class Form1
         'BreakFunction
         '
         Me.BreakFunction.AutoSize = True
-        Me.BreakFunction.Enabled = False
         Me.BreakFunction.Location = New System.Drawing.Point(22, 42)
         Me.BreakFunction.Name = "BreakFunction"
         Me.BreakFunction.Size = New System.Drawing.Size(140, 17)
@@ -106,7 +105,7 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 110)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(205, 245)
+        Me.GroupBox2.Size = New System.Drawing.Size(210, 245)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "General"
@@ -143,7 +142,6 @@ Partial Class Form1
         'ComboLongClick
         '
         Me.ComboLongClick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboLongClick.Enabled = False
         Me.ComboLongClick.FormattingEnabled = True
         Me.ComboLongClick.Location = New System.Drawing.Point(9, 97)
         Me.ComboLongClick.Name = "ComboLongClick"
@@ -152,7 +150,6 @@ Partial Class Form1
         '
         'TxtLong
         '
-        Me.TxtLong.Enabled = False
         Me.TxtLong.Location = New System.Drawing.Point(9, 124)
         Me.TxtLong.MaxLength = 9
         Me.TxtLong.Name = "TxtLong"
@@ -219,7 +216,7 @@ Partial Class Form1
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(230, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(234, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -277,7 +274,7 @@ Partial Class Form1
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label7.Location = New System.Drawing.Point(12, 358)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(205, 39)
+        Me.Label7.Size = New System.Drawing.Size(210, 39)
         Me.Label7.TabIndex = 6
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -289,7 +286,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(230, 406)
+        Me.ClientSize = New System.Drawing.Size(234, 406)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
