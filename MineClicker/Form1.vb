@@ -24,10 +24,22 @@ Public Class Form1
         ComboLongClick.Items.Add("Iron Pickaxe")
         ComboLongClick.Items.Add("Diamond Pickaxe")
         ComboLongClick.Items.Add("Custom Time")
-        ComboLongClick.Text = "Iron Pickaxe"
+        ComboLongClick.Text = "Custom Time"
 
         TxtRepeat.Text = My.Settings.TimeRepeat
+        If My.Settings.mode = 1 Then
+            FishingFunction.Checked = True
+            BreakFunction.Checked = False
 
+            ComboLongClick.Enabled = False
+            TxtLong.Enabled = False
+        ElseIf My.Settings.mode = 2 Then
+            FishingFunction.Checked = False
+            BreakFunction.Checked = True
+
+            ComboLongClick.Enabled = False
+            TxtLong.Enabled = True
+        End If
         TxtDelay.Text = My.Settings.TimeDelay
     End Sub
 
@@ -45,14 +57,22 @@ Public Class Form1
         If BreakFunction.Checked = True Then
             BreakFunction.Checked = False
             FishingFunction.Checked = True
+            My.Settings.mode = 1
         End If
+
+        ComboLongClick.Enabled = False
+        TxtLong.Enabled = False
     End Sub
 
     Private Sub BreakFunction_CheckedChanged(sender As Object, e As EventArgs) Handles BreakFunction.CheckedChanged
         If FishingFunction.Checked = True Then
             FishingFunction.Checked = False
             BreakFunction.Checked = True
+            My.Settings.mode = 2
         End If
+
+        'ComboLongClick.Enabled = True
+        TxtLong.Enabled = True
     End Sub
 
     Private Sub TimerFishing_Tick(sender As Object, e As EventArgs) Handles TimerFishing.Tick
@@ -163,5 +183,9 @@ Public Class Form1
         Me.Show()
         NotifyIcon1.Visible = False
         Me.WindowState = FormWindowState.Normal
+    End Sub
+
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        My.Settings.Save()
     End Sub
 End Class
