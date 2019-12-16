@@ -24,6 +24,12 @@
       CheckBox2.Checked = False
       CheckBox1.Enabled = False
     End If
+
+    If My.Settings.StartFast = False Then
+      CheckBox3.Checked = False
+    Else
+      CheckBox3.Checked = True
+    End If
   End Sub
 
   Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -50,6 +56,14 @@
       My.Settings.indicator = False
       CheckBox1.Enabled = False
       My.Settings.hide = False
+    End If
+  End Sub
+
+  Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
+    If CheckBox3.Checked = True Then
+      My.Settings.StartFast = True
+    Else
+      My.Settings.StartFast = False
     End If
   End Sub
 End Class

@@ -47,7 +47,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Fishing_Rod~1.ico</ApplicationIcon>
+    <ApplicationIcon>favicon%283%29.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -154,6 +154,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="favicon%283%29.ico" />
     <Content Include="Fishing_Rod.ico" />
     <Content Include="Fishing_Rod~1.ico" />
     <None Include="Resources\icons8_facebook_208px.png" />

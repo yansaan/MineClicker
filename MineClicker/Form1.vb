@@ -17,7 +17,10 @@ Public Class Form1
   Dim RunClick As Boolean = False
   Public OpenAnotherForm As Boolean = False
   Dim Repeat As Integer
+  Dim InvDelay As Integer
   Dim repeatEnabled As Boolean
+
+  Dim TimeRepeat As Integer
 
   Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     ComboLongClick.Items.Add("Stone Pickaxe")
@@ -26,7 +29,21 @@ Public Class Form1
     ComboLongClick.Items.Add("Custom Time")
     ComboLongClick.Text = "Custom Time"
 
+    BreakFunction.Enabled = False
+    InvDelay = My.Settings.TimeDelay
+
+    ComboBox1.Items.Add("Seconds")
+    ComboBox1.Items.Add("Intervals")
+    If My.Settings.delayShow = 0 Then
+      ComboBox1.Text = "Seconds"
+      TxtDelay.Text = InvDelay / 1000
+    ElseIf My.Settings.delayShow = 1 Then
+      ComboBox1.Text = "Intervals"
+      TxtDelay.Text = InvDelay
+    End If
+
     TxtRepeat.Text = My.Settings.TimeRepeat
+
     If My.Settings.mode = 1 Then
       FishingFunction.Checked = True
       BreakFunction.Checked = False
@@ -40,7 +57,6 @@ Public Class Form1
       ComboLongClick.Enabled = False
       TxtLong.Enabled = True
     End If
-    TxtDelay.Text = My.Settings.TimeDelay
   End Sub
 
   'Private Sub ClickFunction()
@@ -76,14 +92,13 @@ Public Class Form1
   End Sub
 
   Private Sub TimerFishing_Tick(sender As Object, e As EventArgs) Handles TimerFishing.Tick
-
     AFKFish()
     If repeatEnabled = True Then
-      If Repeat = 0 Then
+      If TimeRepeat = 0 Then
         TimerFishing.Enabled = False
         NotifyIcon1.Icon = My.Resources.FishGrey
       Else
-        Repeat -= 1
+        TimeRepeat -= 1
       End If
     End If
   End Sub
@@ -105,21 +120,41 @@ Public Class Form1
       KeysString = My.Settings.KeyString
     End If
 
-    My.Settings.TimeRepeat = TxtRepeat.Text
+    If TxtRepeat.Text = "" Then
+      Repeat = 0
+    Else
+      Repeat = TxtRepeat.Text
+    End If
 
-    If TxtDelay.Text = "" Or TxtLong.Text = "" Or TxtRepeat.Text = "" Then
+    If TxtDelay.Text = "" Then
+      InvDelay = 0
+    Else
+      If My.Settings.delayShow = 0 Then
+        InvDelay = TxtDelay.Text * 1000
+      ElseIf My.Settings.delayShow = 1 Then
+        InvDelay = TxtDelay.Text
+      End If
+    End If
+
+    My.Settings.TimeDelay = InvDelay
+    My.Settings.TimeRepeat = Repeat
+
+    If InvDelay = 0 Or TxtLong.Text = "" Or TxtRepeat.Text = "" Then
       Label7.Text = "AutoClick not running but input null"
     Else
-      If (TxtDelay.Text >= 200) Then
-        Label7.Text = " Open Minecraft, and press (" + KeysString + ") for play and Stop"
-        TimerFishing.Interval = TxtDelay.Text
-        My.Settings.TimeDelay = TxtDelay.Text
-        If RunClick = True Then
-          Runing()
-        End If
-      Else
+      If InvDelay < 200 Then
         Label7.Text = "AutoClick not running when setting to minimal"
-      End If
+      ElseIf InvDelay > 99999 Then
+        Label7.Text = "AutoClick not running when setting to maximal"
+      Else
+        Label7.Text = " Open Minecraft, and press (" + KeysString + ") for play and Stop"
+
+          TimerFishing.Interval = InvDelay
+
+          If RunClick = True Then
+            Runing()
+          End If
+        End If
     End If
   End Sub
 
@@ -143,19 +178,36 @@ Public Class Form1
     End If
   End Sub
   Private Sub KeyEnabled()
-    If TimerFishing.Enabled = False Then
-      TimerFishing.Enabled = True
-      NotifyIcon1.Icon = My.Resources.Fish
-    ElseIf TimerFishing.Enabled = True Then
-      TimerFishing.Enabled = False
-      NotifyIcon1.Icon = My.Resources.FishGrey
-    End If
-    Repeat = TxtRepeat.Text
-
     If Repeat > 0 Then
       repeatEnabled = True
     Else
       repeatEnabled = False
+    End If
+
+    If TimerFishing.Enabled = False Then
+      NotifyIcon1.Icon = My.Resources.Fish
+
+      If My.Settings.StartFast = True Then
+        AFKFish()
+        If repeatEnabled = True Then
+          If Repeat = 1 Then
+            NotifyIcon1.Icon = My.Resources.FishGrey
+          ElseIf Repeat > 1 Then
+            TimerFishing.Enabled = True
+            TimeRepeat = Repeat - 1
+          End If
+        Else
+          TimerFishing.Enabled = True
+        End If
+      Else
+        If repeatEnabled = True Then
+          TimeRepeat = Repeat
+        End If
+        TimerFishing.Enabled = True
+      End If
+    ElseIf TimerFishing.Enabled = True Then
+      TimerFishing.Enabled = False
+      NotifyIcon1.Icon = My.Resources.FishGrey
     End If
   End Sub
 
@@ -166,10 +218,16 @@ Public Class Form1
     FrmAbout.ShowDialog()
   End Sub
 
-  Private Sub TxtDelay_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtDelay.KeyPress, TxtRepeat.KeyPress, TxtLong.KeyPress
-    If Not Char.IsDigit(e.KeyChar) And Not Char.IsControl(e.KeyChar) Then
-      e.Handled = True
+  Private Sub TxtDelay_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtDelay.KeyPress, TxtLong.KeyPress
+    If My.Settings.delayShow = 0 Then
+      e.Handled = Not (Char.IsDigit(e.KeyChar) Or Char.IsControl(e.KeyChar) Or e.KeyChar = ",")
+    ElseIf My.Settings.delayShow = 1 Then
+      e.Handled = Not (Char.IsDigit(e.KeyChar) Or Char.IsControl(e.KeyChar))
     End If
+  End Sub
+
+  Private Sub TxtRepeat_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtRepeat.KeyPress
+    e.Handled = Not (Char.IsDigit(e.KeyChar) Or Char.IsControl(e.KeyChar))
   End Sub
 
   Private Sub Form1_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -207,5 +265,20 @@ Public Class Form1
 
   Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
     Me.Close()
+  End Sub
+
+  Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+    If ComboBox1.Text = "Seconds" Then
+      My.Settings.delayShow = 0
+      TxtDelay.Text = InvDelay / 1000
+    ElseIf ComboBox1.Text = "Intervals" Then
+      My.Settings.delayShow = 1
+      TxtDelay.Text = InvDelay
+    End If
+  End Sub
+
+  Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+    MessageBox.Show("1 Second = 1.000 Intervals" & ControlChars.CrLf &
+                      "Interval duration for allowed is 200 - 99.999 Intervals", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information)
   End Sub
 End Class
