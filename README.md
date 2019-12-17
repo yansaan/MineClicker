@@ -6,7 +6,7 @@
 
 Introducion
 -----
-MineClicker is software AutoClicker special for Minecraft (Bedrock), Easy for use, and minimal lag
+**MineClicker** is software **AutoClicker** special for [**Minecraft**](http://minecraft.net) (**Bedrock**), Easy for use, and minimal lag
 
 ## How To use
 
