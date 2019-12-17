@@ -1,18 +1,27 @@
 ﻿Public Class FormSettings
-  Dim KeysData As Integer = My.Settings.KeyPush
-  Dim KeyInput As String = My.Settings.KeyString
+  Dim KeysData As Integer
+  Dim KeyInput As String
   Dim keyResult As String
 
-  Dim comb As Boolean = My.Settings.CombEnable
+  Dim comb As Boolean
 
-  Dim SaveResult As String = ""
+  Dim SaveResult As String
 
-  Dim Savedkey As Integer = My.Settings.KeyPush
-  Dim keyComb As Integer = My.Settings.Combination
-  Dim keyCombSaved As Integer = My.Settings.Combination
-  Dim combInput As String = My.Settings.combString
-  Dim combLong As Boolean = False
+  Dim Savedkey As Integer
+  Dim keyComb As Integer
+  Dim keyCombSaved As Integer
+  Dim combInput As String
+  Dim combLong As Boolean
   Private Sub FormSettings_Load(sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    KeysData = My.Settings.KeyPush
+    KeyInput = My.Settings.KeyString
+    comb = My.Settings.CombEnable
+    Savedkey = My.Settings.KeyPush
+    keyComb = My.Settings.Combination
+    keyCombSaved = My.Settings.Combination
+    combInput = My.Settings.combString
+    combLong = False
+
     If My.Settings.CombEnable Then
       Button2.Enabled = True
     Else
@@ -153,7 +162,7 @@
   End Sub
 
   Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-    Dim ResetSetting As MsgBoxResult = MsgBox("", vbYesNo + vbQuestion, "Reseting")
+    Dim ResetSetting As MsgBoxResult = MsgBox("Are you sure you want to change it to the default key (F6)?", vbYesNo + vbQuestion, "Reseting")
     If ResetSetting = vbYes Then
       My.Settings.Reset()
       'LabelPress.Text = "F6"
@@ -191,8 +200,23 @@
   End Sub
 
   Private Sub FormSettings_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-    If Not My.Settings.KeyPush Then
+    If Not My.Settings.CombEnable = comb Then
 
+    Else
+      If Not My.Settings.Combination = keyComb Then
+
+      Else
+        If Not My.Settings.KeyPush = KeysData Then
+          Dim result As Integer = MsgBox("Are you saving key before exit?", MsgBoxStyle.Information + MsgBoxStyle.YesNoCancel, "Settings")
+          If result = DialogResult.Yes Then
+            Button1_Click(sender, e)
+          ElseIf result = DialogResult.No Then
+
+          ElseIf result = DialogResult.Cancel Then
+            e.Cancel = True
+          End If
+        End If
+      End If
     End If
   End Sub
 End Class

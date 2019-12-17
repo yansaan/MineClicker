@@ -149,9 +149,9 @@ Public Class Form1
       Else
         Label7.Text = " Open Minecraft, and press (" + KeysString + ") for play and Stop"
 
-          TimerFishing.Interval = InvDelay
+        TimerFishing.Interval = InvDelay
 
-          If RunClick = True Then
+        If RunClick = True Then
             Runing()
           End If
         End If
@@ -280,5 +280,15 @@ Public Class Form1
   Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
     MessageBox.Show("1 Second = 1.000 Intervals" & ControlChars.CrLf &
                       "Interval duration for allowed is 200 - 99.999 Intervals", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information)
+  End Sub
+
+  Private Sub TxtDelay_TextChanged(sender As Object, e As EventArgs) Handles TxtDelay.TextChanged
+    If My.Settings.delayShow = 0 And TxtDelay.Text.Contains(",") Then
+      Dim menitdelay As String() = TxtDelay.Text.Split(New Char() {","c})
+
+      If menitdelay(1).Length > 3 Then
+        TxtDelay.Text = InvDelay / 1000
+      End If
+    End If
   End Sub
 End Class
