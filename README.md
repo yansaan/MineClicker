@@ -4,8 +4,11 @@
 
 # MineClicker
 
-Introducion
------
+| [Download Latest](https://github.com/ianpwk/MineClicker/releases/latest/download/MineClickerBeta.zip)  | [Tutorial](https://github.com/yansaan/MineClicker#how-to-use) | [Website](https://yansaan.carrd.co/#mineclicker) | Video Tutorial (Soon)
+| ------------- | ------------- | ------------- | ------------- |
+
+##Introducion
+
 **MineClicker** is software **AutoClicker** special for [**Minecraft**](http://minecraft.net) (**Bedrock**), Easy for use, and minimal lag
 
 ## How To use
