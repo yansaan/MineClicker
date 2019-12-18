@@ -16,8 +16,8 @@
 #### AFK Fishing
 
 - Change to **AFK Fishing (Right Click)** in **Click Function**
-- Setting **Delay Click**, if 1 Second = 1000 Intervals, You can change units from seconds to intervals
-- The delay limit of MineClicker is 200 to 99,999 intervals (0.2 - 99,999 seconds)
+- Setting **Delay Click**, if **1 Second = 1000 Intervals**, You can change units **from seconds to intervals**
+- The delay limit of **MineClicker** is **200 to 99.999 intervals** (**0.2 - 99,999 seconds**)
 - You can also limit the number of clicks (**Time Repeat**) in MineClicker, 0 is unlimited
 - Minimize, open your Minecraft world, then press **F6** (default) or your settings keyboard button to start AFK FIshing
 
