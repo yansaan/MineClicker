@@ -176,13 +176,13 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property StartFast() As Boolean
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property FrontEnable() As Boolean
             Get
-                Return CType(Me("StartFast"),Boolean)
+                Return CType(Me("FrontEnable"),Boolean)
             End Get
             Set
-                Me("StartFast") = value
+                Me("FrontEnable") = value
             End Set
         End Property
     End Class

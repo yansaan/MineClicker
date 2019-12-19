@@ -28,6 +28,7 @@ Partial Class Form1
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
     Me.BreakFunction = New System.Windows.Forms.RadioButton()
     Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TxtRepeat = New System.Windows.Forms.TextBox()
@@ -55,6 +56,7 @@ Partial Class Form1
         Me.Label7 = New System.Windows.Forms.Label()
         Me.OutsideForms = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -67,7 +69,7 @@ Partial Class Form1
         '
         Me.FishingFunction.AutoSize = True
         Me.FishingFunction.Checked = True
-        Me.FishingFunction.Location = New System.Drawing.Point(22, 19)
+        Me.FishingFunction.Location = New System.Drawing.Point(9, 19)
         Me.FishingFunction.Name = "FishingFunction"
         Me.FishingFunction.Size = New System.Drawing.Size(141, 17)
         Me.FishingFunction.TabIndex = 1
@@ -83,7 +85,7 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.FishingFunction)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 32)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(322, 48)
+        Me.GroupBox1.Size = New System.Drawing.Size(320, 48)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Click Function"
@@ -93,14 +95,15 @@ Partial Class Form1
         Me.BreakFunction.AutoSize = True
         Me.BreakFunction.Location = New System.Drawing.Point(169, 19)
         Me.BreakFunction.Name = "BreakFunction"
-        Me.BreakFunction.Size = New System.Drawing.Size(140, 17)
+        Me.BreakFunction.Size = New System.Drawing.Size(69, 17)
         Me.BreakFunction.TabIndex = 1
-        Me.BreakFunction.Text = "Auto Breaker (Left Click)"
+        Me.BreakFunction.Text = "Left Click"
         Me.BreakFunction.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.LinkLabel1)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.TxtRepeat)
@@ -110,10 +113,19 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 86)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(322, 90)
+        Me.GroupBox2.Size = New System.Drawing.Size(320, 90)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "General"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(82, 36)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(62, 13)
+        Me.Label8.TabIndex = 7
+        Me.Label8.Text = "Miliseconds"
         '
         'LinkLabel1
         '
@@ -210,7 +222,7 @@ Partial Class Form1
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(346, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(344, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -302,7 +314,7 @@ Partial Class Form1
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label7.Location = New System.Drawing.Point(12, 255)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(322, 31)
+        Me.Label7.Size = New System.Drawing.Size(320, 44)
         Me.Label7.TabIndex = 6
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -312,6 +324,7 @@ Partial Class Form1
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Controls.Add(Me.ComboLongClick)
         Me.GroupBox3.Controls.Add(Me.Label2)
         Me.GroupBox3.Controls.Add(Me.TxtLong)
@@ -320,7 +333,16 @@ Partial Class Form1
         Me.GroupBox3.Size = New System.Drawing.Size(322, 70)
         Me.GroupBox3.TabIndex = 7
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Auto Breaker Settings"
+        Me.GroupBox3.Text = "Left Click Settings"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(235, 40)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(49, 13)
+        Me.Label9.TabIndex = 7
+        Me.Label9.Text = "Seconds"
         '
         'Label4
         '
@@ -328,9 +350,9 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label4.Location = New System.Drawing.Point(12, 293)
+        Me.Label4.Location = New System.Drawing.Point(12, 305)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(322, 27)
+        Me.Label4.Size = New System.Drawing.Size(320, 27)
         Me.Label4.TabIndex = 6
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -338,7 +360,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(346, 335)
+        Me.ClientSize = New System.Drawing.Size(344, 335)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label7)
@@ -397,4 +419,6 @@ Partial Class Form1
     Friend WithEvents VideoToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
 End Class

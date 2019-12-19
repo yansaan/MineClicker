@@ -102,9 +102,9 @@ Partial Class SettUtama
         Me.CheckBox3.AutoSize = True
         Me.CheckBox3.Location = New System.Drawing.Point(14, 78)
         Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.Size = New System.Drawing.Size(94, 17)
+        Me.CheckBox3.Size = New System.Drawing.Size(121, 17)
         Me.CheckBox3.TabIndex = 4
-        Me.CheckBox3.Text = "Starting Faster"
+        Me.CheckBox3.Text = "Pin Program in Front"
         Me.CheckBox3.UseVisualStyleBackColor = True
         '
         'Label2

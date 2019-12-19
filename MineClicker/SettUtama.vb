@@ -25,7 +25,7 @@
       CheckBox1.Enabled = False
     End If
 
-    If My.Settings.StartFast = False Then
+    If My.Settings.FrontEnable = False Then
       CheckBox3.Checked = False
     Else
       CheckBox3.Checked = True
@@ -61,9 +61,9 @@
 
   Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
     If CheckBox3.Checked = True Then
-      My.Settings.StartFast = True
+      My.Settings.FrontEnable = True
     Else
-      My.Settings.StartFast = False
+      My.Settings.FrontEnable = False
     End If
   End Sub
 End Class
