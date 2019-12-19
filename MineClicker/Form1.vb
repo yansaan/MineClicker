@@ -23,24 +23,15 @@ Public Class Form1
   Dim TimeRepeat As Integer
 
   Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    ComboLongClick.Items.Add("Stone Pickaxe")
-    ComboLongClick.Items.Add("Iron Pickaxe")
-    ComboLongClick.Items.Add("Diamond Pickaxe")
-    ComboLongClick.Items.Add("Custom Time")
-    ComboLongClick.Text = "Custom Time"
+    ComboLongClick.Items.Add("3 Seconds")
+    ComboLongClick.Items.Add("5 Seconds")
+    ComboLongClick.Items.Add("Unlimited")
+    ComboLongClick.Items.Add("Custom...")
+    ComboLongClick.Text = "Custom..."
 
-    BreakFunction.Enabled = False
     InvDelay = My.Settings.TimeDelay
 
-    ComboBox1.Items.Add("Seconds")
-    ComboBox1.Items.Add("Intervals")
-    If My.Settings.delayShow = 0 Then
-      ComboBox1.Text = "Seconds"
-      TxtDelay.Text = InvDelay / 1000
-    ElseIf My.Settings.delayShow = 1 Then
-      ComboBox1.Text = "Intervals"
-      TxtDelay.Text = InvDelay
-    End If
+    TxtDelay.Text = InvDelay
 
     TxtRepeat.Text = My.Settings.TimeRepeat
 
@@ -129,11 +120,7 @@ Public Class Form1
     If TxtDelay.Text = "" Then
       InvDelay = 0
     Else
-      If My.Settings.delayShow = 0 Then
-        InvDelay = TxtDelay.Text * 1000
-      ElseIf My.Settings.delayShow = 1 Then
-        InvDelay = TxtDelay.Text
-      End If
+      InvDelay = TxtDelay.Text
     End If
 
     My.Settings.TimeDelay = InvDelay
@@ -147,7 +134,7 @@ Public Class Form1
       ElseIf InvDelay > 99999 Then
         Label7.Text = "AutoClick not running when setting to maximal"
       Else
-        Label7.Text = " Open Minecraft, and press (" + KeysString + ") for play and Stop"
+        Label7.Text = "Press (" + KeysString + ") for play and Stop when in Minecraft World"
 
         TimerFishing.Interval = InvDelay
 
@@ -218,15 +205,8 @@ Public Class Form1
     FrmAbout.ShowDialog()
   End Sub
 
-  Private Sub TxtDelay_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtDelay.KeyPress, TxtLong.KeyPress
-    If My.Settings.delayShow = 0 Then
-      e.Handled = Not (Char.IsDigit(e.KeyChar) Or Char.IsControl(e.KeyChar) Or e.KeyChar = ",")
-    ElseIf My.Settings.delayShow = 1 Then
-      e.Handled = Not (Char.IsDigit(e.KeyChar) Or Char.IsControl(e.KeyChar))
-    End If
-  End Sub
-
-  Private Sub TxtRepeat_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtRepeat.KeyPress
+  Private Sub TxtDelay_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtDelay.KeyPress, TxtLong.KeyPress, TxtRepeat.KeyPress
+    'e.Handled = Not (Char.IsDigit(e.KeyChar) Or Char.IsControl(e.KeyChar) Or e.KeyChar = ",")
     e.Handled = Not (Char.IsDigit(e.KeyChar) Or Char.IsControl(e.KeyChar))
   End Sub
 
@@ -267,28 +247,12 @@ Public Class Form1
     Me.Close()
   End Sub
 
-  Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-    If ComboBox1.Text = "Seconds" Then
-      My.Settings.delayShow = 0
-      TxtDelay.Text = InvDelay / 1000
-    ElseIf ComboBox1.Text = "Intervals" Then
-      My.Settings.delayShow = 1
-      TxtDelay.Text = InvDelay
-    End If
-  End Sub
-
   Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
     MessageBox.Show("1 Second = 1.000 Intervals" & ControlChars.CrLf &
                       "Interval duration for allowed is 200 - 99.999 Intervals", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information)
   End Sub
 
-  Private Sub TxtDelay_TextChanged(sender As Object, e As EventArgs) Handles TxtDelay.TextChanged
-    If My.Settings.delayShow = 0 And TxtDelay.Text.Contains(",") Then
-      Dim menitdelay As String() = TxtDelay.Text.Split(New Char() {","c})
+  Private Sub TutorialToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TutorialToolStripMenuItem.Click
 
-      If menitdelay(1).Length > 3 Then
-        TxtDelay.Text = InvDelay / 1000
-      End If
-    End If
   End Sub
 End Class
