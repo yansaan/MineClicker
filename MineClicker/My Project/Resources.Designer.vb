@@ -81,6 +81,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property fb() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("fb", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         '''</summary>
         Friend ReadOnly Property Fish() As System.Drawing.Icon
@@ -107,6 +117,26 @@ Namespace My.Resources
             Get
                 Dim obj As Object = ResourceManager.GetObject("Fishing_Rod", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        '''</summary>
+        Friend ReadOnly Property fishoff() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("fishoff", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        '''</summary>
+        Friend ReadOnly Property fishon() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("fishon", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
             End Get
         End Property
         
@@ -176,6 +206,46 @@ Namespace My.Resources
         Friend ReadOnly Property icons8_youtube_play_480px() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("icons8_youtube_play_480px", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property karya() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("karya", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        '''</summary>
+        Friend ReadOnly Property mineoff() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("mineoff", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        '''</summary>
+        Friend ReadOnly Property mineon() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("mineon", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property trakteer() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("trakteer", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

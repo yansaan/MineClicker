@@ -24,10 +24,10 @@ Partial Class Form1
     Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container()
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-    Me.FishingFunction = New System.Windows.Forms.RadioButton()
-    Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-    Me.BreakFunction = New System.Windows.Forms.RadioButton()
-    Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ComboBoxClick = New System.Windows.Forms.ComboBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -51,10 +51,10 @@ Partial Class Form1
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TimerFishing = New System.Windows.Forms.Timer(Me.components)
+        Me.DelayRunning = New System.Windows.Forms.Timer(Me.components)
         Me.RunningKey = New System.Windows.Forms.Timer(Me.components)
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.OutsideForms = New System.Windows.Forms.Timer(Me.components)
+        Me.LeftFuncion = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -65,24 +65,12 @@ Partial Class Form1
         Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
-        'FishingFunction
-        '
-        Me.FishingFunction.AutoSize = True
-        Me.FishingFunction.Checked = True
-        Me.FishingFunction.Location = New System.Drawing.Point(9, 19)
-        Me.FishingFunction.Name = "FishingFunction"
-        Me.FishingFunction.Size = New System.Drawing.Size(141, 17)
-        Me.FishingFunction.TabIndex = 1
-        Me.FishingFunction.TabStop = True
-        Me.FishingFunction.Text = "AFK Fishing (Right Click)"
-        Me.FishingFunction.UseVisualStyleBackColor = True
-        '
         'GroupBox1
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.BreakFunction)
-        Me.GroupBox1.Controls.Add(Me.FishingFunction)
+        Me.GroupBox1.Controls.Add(Me.ComboBoxClick)
+        Me.GroupBox1.Controls.Add(Me.CheckBox1)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 32)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(320, 48)
@@ -90,15 +78,24 @@ Partial Class Form1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Click Function"
         '
-        'BreakFunction
+        'ComboBoxClick
         '
-        Me.BreakFunction.AutoSize = True
-        Me.BreakFunction.Location = New System.Drawing.Point(169, 19)
-        Me.BreakFunction.Name = "BreakFunction"
-        Me.BreakFunction.Size = New System.Drawing.Size(69, 17)
-        Me.BreakFunction.TabIndex = 1
-        Me.BreakFunction.Text = "Left Click"
-        Me.BreakFunction.UseVisualStyleBackColor = True
+        Me.ComboBoxClick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxClick.FormattingEnabled = True
+        Me.ComboBoxClick.Location = New System.Drawing.Point(23, 19)
+        Me.ComboBoxClick.Name = "ComboBoxClick"
+        Me.ComboBoxClick.Size = New System.Drawing.Size(185, 21)
+        Me.ComboBoxClick.TabIndex = 3
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(231, 21)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(75, 17)
+        Me.CheckBox1.TabIndex = 2
+        Me.CheckBox1.Text = "Repeating"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -153,7 +150,6 @@ Partial Class Form1
         Me.TxtRepeat.Name = "TxtRepeat"
         Me.TxtRepeat.Size = New System.Drawing.Size(76, 20)
         Me.TxtRepeat.TabIndex = 2
-        Me.TxtRepeat.Text = "0"
         '
         'TxtDelay
         '
@@ -161,7 +157,6 @@ Partial Class Form1
         Me.TxtDelay.Name = "TxtDelay"
         Me.TxtDelay.Size = New System.Drawing.Size(67, 20)
         Me.TxtDelay.TabIndex = 2
-        Me.TxtDelay.Text = "1000"
         '
         'Label6
         '
@@ -206,7 +201,6 @@ Partial Class Form1
         Me.TxtLong.Name = "TxtLong"
         Me.TxtLong.Size = New System.Drawing.Size(71, 20)
         Me.TxtLong.TabIndex = 2
-        Me.TxtLong.Text = "0"
         '
         'Label2
         '
@@ -298,14 +292,14 @@ Partial Class Form1
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
-        'TimerFishing
+        'DelayRunning
         '
-        Me.TimerFishing.Interval = 1000
+        Me.DelayRunning.Interval = 1000
         '
         'RunningKey
         '
         Me.RunningKey.Enabled = True
-        Me.RunningKey.Interval = 10
+        Me.RunningKey.Interval = 5
         '
         'Label7
         '
@@ -318,9 +312,9 @@ Partial Class Form1
         Me.Label7.TabIndex = 6
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'OutsideForms
+        'LeftFuncion
         '
-        Me.OutsideForms.Enabled = True
+        Me.LeftFuncion.Interval = 1000
         '
         'GroupBox3
         '
@@ -354,6 +348,7 @@ Partial Class Form1
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(320, 27)
         Me.Label4.TabIndex = 6
+        Me.Label4.Text = "Status: ..."
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Form1
@@ -387,9 +382,7 @@ Partial Class Form1
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents FishingFunction As RadioButton
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents BreakFunction As RadioButton
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents ComboLongClick As ComboBox
     Friend WithEvents Label3 As Label
@@ -406,11 +399,11 @@ Partial Class Form1
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NotifyIcon1 As NotifyIcon
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
-    Friend WithEvents TimerFishing As Timer
+    Friend WithEvents DelayRunning As Timer
     Friend WithEvents RunningKey As Timer
     Friend WithEvents Label7 As Label
     Friend WithEvents TxtDelay As TextBox
-    Friend WithEvents OutsideForms As Timer
+    Friend WithEvents LeftFuncion As Timer
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LinkLabel1 As LinkLabel
@@ -421,4 +414,6 @@ Partial Class Form1
     Friend WithEvents Label4 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
+    Friend WithEvents ComboBoxClick As ComboBox
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

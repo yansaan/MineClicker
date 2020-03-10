@@ -5,23 +5,14 @@
     <Setting Name="KeyPush" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">117</Value>
     </Setting>
-    <Setting Name="Combination" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="CombEnable" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="KeyString" Type="System.String" Scope="User">
       <Value Profile="(Default)">F6</Value>
-    </Setting>
-    <Setting Name="combString" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="TimeDelay" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="TimeRepeat" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="mode" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -29,11 +20,20 @@
     <Setting Name="hide" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="indicator" Type="System.Boolean" Scope="User">
+    <Setting Name="FrontEnable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="FrontEnable" Type="System.Boolean" Scope="User">
+    <Setting Name="disableClick" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EnabledRepeat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TimeLong" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="LongSelect" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

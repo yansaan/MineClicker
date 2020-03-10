@@ -3,50 +3,27 @@
   Dim KeyInput As String
   Dim keyResult As String
 
-  Dim comb As Boolean
+  Dim reset As Boolean
 
-  Dim SaveResult As String
-
-  Dim Savedkey As Integer
-  Dim keyComb As Integer
-  Dim keyCombSaved As Integer
-  Dim combInput As String
-  Dim combLong As Boolean
   Private Sub FormSettings_Load(sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    TopSettKey()
+
     KeysData = My.Settings.KeyPush
     KeyInput = My.Settings.KeyString
-    comb = My.Settings.CombEnable
-    Savedkey = My.Settings.KeyPush
-    keyComb = My.Settings.Combination
-    keyCombSaved = My.Settings.Combination
-    combInput = My.Settings.combString
-    combLong = False
 
-    If My.Settings.CombEnable Then
+    If Not My.Settings.KeyPush = 117 Then
       Button2.Enabled = True
-    Else
-      If Not My.Settings.KeyPush = 117 Then
-        Button2.Enabled = True
-      End If
     End If
 
-    If comb = False Then
-      keyResult = KeyInput.ToString()
-      Label2.Text = My.Settings.KeyPush.ToString
-    Else
-      keyResult = "(" + combInput + ") + (" + KeyInput.ToString() + ")"
-      Label2.Text = keyComb.ToString + ", " + My.Settings.KeyPush.ToString
-    End If
-    SaveResult = keyResult
-
-
-    LabelPress.Text = keyResult
+    Label2.Text = KeysData
+    LabelPress.Text = KeyInput
     Label1.Text = ""
     AddHandler Me.KeyUp, AddressOf SavePress
   End Sub
 
   Private Sub SavePress(ByVal o As Object, ByVal e As KeyEventArgs)
     e.SuppressKeyPress = True
+
     If e.KeyValue.ToString = "9" Or e.KeyValue.ToString = "13" Then
 
     ElseIf e.KeyValue.ToString = "20" Or
@@ -54,43 +31,14 @@
     e.KeyValue.ToString = "91" Or
     e.KeyValue.ToString = "93" Or
     e.KeyValue.ToString = "44" Or
+    e.KeyValue.ToString = "27" Or
+    e.KeyValue.ToString = "16" Or
+    e.KeyValue.ToString = "17" Or
+    e.KeyValue.ToString = "18" Or
     (e.KeyCode >= Keys.NumPad0 And e.KeyCode <= Keys.NumPad9) Then
       Label1.Text = "This input not support"
-
-    ElseIf e.KeyValue.ToString = "27" Then
-      If combLong = True Then
-        keyComb = keyCombSaved
-        KeysData = Savedkey
-        combLong = False
-
-        Label1.Text = ""
-      Else
-        Label1.Text = "This input not support"
-      End If
-
-    ElseIf e.KeyValue.ToString = "16" Or
-        e.KeyValue.ToString = "17" Or
-        e.KeyValue.ToString = "18" Then
-      KeysData = 0
-      keyComb = e.KeyValue
-
-      Label1.Text = "Press Esc for cencel combination"
-
-      comb = True
-      combLong = True
-
-      If e.KeyValue.ToString = "16" Then
-        combInput = "Shift"
-      ElseIf e.KeyValue.ToString = "17" Then
-        combInput = "Ctrl"
-      ElseIf e.KeyValue.ToString = "18" Then
-        combInput = "Alt"
-      End If
-
-      keyResult = "(" + combInput + ") + ()"
     Else
       KeysData = e.KeyValue
-      Savedkey = e.KeyValue
 
       If e.KeyData.ToString = "D1" Or
           e.KeyData.ToString = "D2" Or
@@ -128,94 +76,39 @@
       Else
         KeyInput = e.KeyCode.ToString
       End If
-
-      If combLong = False Then
-        keyComb = 0
-        keyCombSaved = 0
-        comb = False
-
-        combInput = ""
-        keyResult = KeyInput
-      Else
-        keyCombSaved = keyComb
-        keyResult = "(" + combInput + ") + (" + KeyInput + ")"
-      End If
-
-      combLong = False
-
-      SaveResult = keyResult
       Label1.Text = ""
-    End If
 
-    If e.KeyValue.ToString = "27" Then
-      LabelPress.Text = SaveResult
-    Else
-      LabelPress.Text = keyResult
+      Label2.Text = KeysData
+      LabelPress.Text = KeyInput
     End If
-
-    If comb = True Then
-      Label2.Text = keyComb.ToString + ", " + KeysData.ToString
-    Else
-      Label2.Text = KeysData.ToString
-    End If
-
   End Sub
 
   Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
     Dim ResetSetting As MsgBoxResult = MsgBox("Are you sure you want to change it to the default key (F6)?", vbYesNo + vbQuestion, "Reseting")
     If ResetSetting = vbYes Then
-      My.Settings.Reset()
-      'LabelPress.Text = "F6"
-      'Label2.Text = My.Settings.KeyPush.ToString
+
       Me.Close()
     End If
   End Sub
 
   Private Sub FormSettings_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-    Dim KeysString As String = ""
-    If My.Settings.CombEnable = True Then
-      KeysString = My.Settings.combString + " + " + My.Settings.KeyString
-    Else
-      KeysString = My.Settings.KeyString
-    End If
-
-    SettUtama.TextBox1.Text = KeysString
+    SettUtama.ListBox1.Items.Clear()
+    SettUtama.ListKey()
   End Sub
 
   Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-    My.Settings.CombEnable = comb
-
-    If comb = False Then
-      My.Settings.Combination = 0
-      My.Settings.combString = ""
-    Else
-      My.Settings.Combination = keyComb
-      My.Settings.combString = combInput
-    End If
-
     My.Settings.KeyPush = KeysData
     My.Settings.KeyString = KeyInput
-
     Me.Close()
   End Sub
 
   Private Sub FormSettings_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-    If Not My.Settings.CombEnable = comb Then
-
-    Else
-      If Not My.Settings.Combination = keyComb Then
-
-      Else
-        If Not My.Settings.KeyPush = KeysData Then
-          Dim result As Integer = MsgBox("Are you saving key before exit?", MsgBoxStyle.Information + MsgBoxStyle.YesNoCancel, "Settings")
-          If result = DialogResult.Yes Then
-            Button1_Click(sender, e)
-          ElseIf result = DialogResult.No Then
-
-          ElseIf result = DialogResult.Cancel Then
-            e.Cancel = True
-          End If
-        End If
+    If Not My.Settings.KeyPush = KeysData Then
+      Dim result As Integer = MsgBox("Are you saving key before exit?", MsgBoxStyle.Information + MsgBoxStyle.YesNoCancel, "Settings")
+      If result = DialogResult.Yes Then
+        Button1_Click(sender, e)
+      ElseIf result = DialogResult.Cancel Then
+        e.Cancel = True
       End If
     End If
   End Sub

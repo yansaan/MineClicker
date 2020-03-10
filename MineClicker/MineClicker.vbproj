@@ -114,6 +114,7 @@
     <Compile Include="SettUtama.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TopForm.vb" />
     <Compile Include="UpdateFrm.Designer.vb">
       <DependentUpon>UpdateFrm.vb</DependentUpon>
     </Compile>
@@ -157,6 +158,13 @@
     <Content Include="favicon%283%29.ico" />
     <Content Include="Fishing_Rod.ico" />
     <Content Include="Fishing_Rod~1.ico" />
+    <None Include="Resources\karya.png" />
+    <None Include="Resources\fb.png" />
+    <None Include="Resources\trakteer.png" />
+    <None Include="Resources\mineon.ico" />
+    <None Include="Resources\fishoff.ico" />
+    <None Include="Resources\fishon.ico" />
+    <None Include="Resources\mineoff.ico" />
     <None Include="Resources\icons8_facebook_208px.png" />
     <None Include="Resources\icons8_youtube_play_480px.png" />
     <None Include="Resources\icons8_website_512px.png" />
@@ -169,6 +177,17 @@
     <None Include="Resources\FishGrey.ico" />
     <None Include="Resources\Fish.ico" />
     <None Include="Resources\Fishing_Rod.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

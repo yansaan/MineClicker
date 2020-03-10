@@ -68,30 +68,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
-        Public Property Combination() As Integer
-            Get
-                Return CType(Me("Combination"),Integer)
-            End Get
-            Set
-                Me("Combination") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CombEnable() As Boolean
-            Get
-                Return CType(Me("CombEnable"),Boolean)
-            End Get
-            Set
-                Me("CombEnable") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("F6")>  _
         Public Property KeyString() As String
             Get
@@ -99,18 +75,6 @@ Namespace My
             End Get
             Set
                 Me("KeyString") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property combString() As String
-            Get
-                Return CType(Me("combString"),String)
-            End Get
-            Set
-                Me("combString") = value
             End Set
         End Property
         
@@ -128,7 +92,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
         Public Property TimeRepeat() As Integer
             Get
                 Return CType(Me("TimeRepeat"),Integer)
@@ -165,24 +129,60 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property indicator() As Boolean
-            Get
-                Return CType(Me("indicator"),Boolean)
-            End Get
-            Set
-                Me("indicator") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property FrontEnable() As Boolean
             Get
                 Return CType(Me("FrontEnable"),Boolean)
             End Get
             Set
                 Me("FrontEnable") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property disableClick() As Boolean
+            Get
+                Return CType(Me("disableClick"),Boolean)
+            End Get
+            Set
+                Me("disableClick") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property EnabledRepeat() As Boolean
+            Get
+                Return CType(Me("EnabledRepeat"),Boolean)
+            End Get
+            Set
+                Me("EnabledRepeat") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("4")>  _
+        Public Property TimeLong() As Integer
+            Get
+                Return CType(Me("TimeLong"),Integer)
+            End Get
+            Set
+                Me("TimeLong") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property LongSelect() As Integer
+            Get
+                Return CType(Me("LongSelect"),Integer)
+            End Get
+            Set
+                Me("LongSelect") = value
             End Set
         End Property
     End Class
