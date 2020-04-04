@@ -34,21 +34,34 @@ Public Class Form1
 
   Declare Sub mouse_event Lib "user32" Alias "mouse_event" (ByVal dwFlags As Long, ByVal dx As Long, ByVal dy As Long, ByVal cButtons As Long, ByVal dwExtraInfo As Long)
 
+  ' Keyboard Function
   Private keyPush As Integer
   Dim KeysString As String
 
+  ' Auto Click Function
   Dim Clickers As Boolean = False
-  Dim Repeat As Integer
   Dim InvDelay As Integer
+
+  ' Repeat Function
+  Dim Repeat As Integer
   Dim repeatEnabled As Boolean
   Private getRepeat As Integer
   Dim TimeRepeat As Integer
+
+  ' Left Running Function
   Dim secBreak As Integer
-  Private LongMine As Integer
+  Private LongMine As String
   Private getSec As Integer
 
-  Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+  Private Unlimited As Boolean = False
+  Dim longBySelect As Integer
+  Dim longSelect As Boolean = True
 
+  Private SecVal As Integer
+  Private MilVal As Integer
+  Private milLong As Boolean = False
+
+  Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     If AlreadyRunning() Then
       RunningKey.Enabled = False
       MessageBox.Show(
@@ -57,76 +70,129 @@ Public Class Form1
     MessageBoxButtons.OK,
     MessageBoxIcon.Exclamation)
       Me.Close()
+    Else
+      NotifyIcon1.Visible = True
+
+      ComboLongClick.Items.Add("3 Seconds")
+      ComboLongClick.Items.Add("5 Seconds")
+      ComboLongClick.Items.Add("Unlimited")
+      ComboLongClick.Items.Add("Custom...")
+
+      Select Case My.Settings.LongSelect
+        Case 1
+          ComboLongClick.Text = "3 Seconds"
+        Case 2
+          ComboLongClick.Text = "5 Seconds"
+        Case 3
+          ComboLongClick.Text = "Unlimited"
+        Case 0
+          ComboLongClick.Text = "Custom..."
+      End Select
+
+      ComboBoxClick.Items.Add("AFK Fish (Right)")
+      ComboBoxClick.Items.Add("Auto Coublestone (Left)")
+
+      Select Case My.Settings.mode
+        Case 1
+          ComboBoxClick.Text = "AFK Fish (Right)"
+        Case 2
+          ComboBoxClick.Text = "Auto Coublestone (Left)"
+      End Select
+
+      Try
+        LongMine = My.Settings.TimeLong
+        TxtLong.Value = LongMine
+      Catch ex As Exception
+        My.Settings.TimeLong = TxtLong.Minimum
+        LongMine = TxtLong.Minimum
+        TxtLong.Value = TxtLong.Minimum
+      End Try
+
+      InvDelay = My.Settings.TimeDelay
+      TxtDelay.Value = InvDelay
+
+      Repeat = My.Settings.TimeRepeat
+      TxtRepeat.Value = Repeat
+
+      Modes()
     End If
+  End Sub
 
-    NotifyIcon1.Visible = True
-
-    ComboLongClick.Items.Add("3 Seconds")
-    ComboLongClick.Items.Add("5 Seconds")
-    ComboLongClick.Items.Add("Unlimited")
-    ComboLongClick.Items.Add("Custom...")
-
-    If My.Settings.LongSelect = 0 Then
-      ComboLongClick.Text = "Custom..."
-    ElseIf My.Settings.LongSelect = 1 Then
-      ComboLongClick.Text = "3 Seconds"
-    ElseIf My.Settings.LongSelect = 2 Then
-      ComboLongClick.Text = "5 Seconds"
-    ElseIf My.Settings.LongSelect = 3 Then
-      ComboLongClick.Text = "Unlimited"
+  Private Sub ValLong()
+    If Unlimited = True Then
+      TxtDelay.Enabled = False
+      TxtRepeat.Enabled = False
+      CheckBox1.Enabled = False
+    Else
+      TxtDelay.Enabled = True
+      CheckBox1.Enabled = True
+      If CheckBox1.Checked = False Then
+        TxtRepeat.Enabled = False
+      Else
+        TxtRepeat.Enabled = True
+      End If
+      Repeater()
     End If
+  End Sub
 
-    ComboBoxClick.Items.Add("AFK Fish (Right)")
-    ComboBoxClick.Items.Add("Auto Coublestone (Left)")
-
-    LongMine = My.Settings.TimeLong
-    TxtLong.Text = LongMine
-
-    InvDelay = My.Settings.TimeDelay
-    TxtDelay.Text = InvDelay
-
-    Repeat = My.Settings.TimeRepeat
-    TxtRepeat.Text = Repeat
-
+  Private Sub Repeater()
     Select Case CheckBox1.Checked
       Case True
+        My.Settings.EnabledRepeat = True
         TxtRepeat.Enabled = True
       Case Else
+        My.Settings.EnabledRepeat = False
         TxtRepeat.Enabled = False
     End Select
+  End Sub
 
-    If My.Settings.mode = 1 Then
-      ComboBoxClick.Text = "AFK Fish (Right)"
-      ComboLongClick.Enabled = False
+  Private Sub Modes()
+    Select Case ComboBoxClick.Text
+      Case "AFK Fish (Right)"
+        ComboLongClick.Enabled = False
+        TxtLong.Enabled = False
+        My.Settings.mode = 1
+        NotifyIcon1.Icon = My.Resources.fishoff
 
-      TxtLong.Enabled = False
-    ElseIf My.Settings.mode = 2 Then
-      ComboBoxClick.Text = "Auto Coublestone (Left)"
-      NotifyIcon1.Icon = My.Resources.fishoff
-      ComboLongClick.Enabled = True
-      Select Case My.Settings.LongSelect
-        Case 0
-          TxtLong.Enabled = True
-        Case Else
-          TxtLong.Enabled = False
-      End Select
-      NotifyIcon1.Icon = My.Resources.mineoff
-    End If
+        CheckBox1.Enabled = True
+        TxtDelay.Enabled = True
 
-    If (My.Application.CommandLineArgs.Count > 0) Then
-      If My.Application.CommandLineArgs(0) = "-set" Then
-        Me.WindowState = FormWindowState.Minimized
-        Me.ShowInTaskbar = False
-      End If
-    End If
+        Repeater()
+      Case "Auto Coublestone (Left)"
+        ComboLongClick.Enabled = True
+        My.Settings.mode = 2
+        NotifyIcon1.Icon = My.Resources.mineoff
 
-    If Me.WindowState = FormWindowState.Normal Then
-      TopFrm1()
-    End If
+        ClickModes()
+    End Select
+  End Sub
 
-    If My.Settings.EnabledRepeat Then
-      CheckBox1.Checked = True
-    End If
+  Private Sub ClickModes()
+    Select Case ComboLongClick.Text
+      Case "3 Seconds"
+        longSelect = True
+        longBySelect = 3
+        Unlimited = False
+        TxtLong.Enabled = False
+        My.Settings.LongSelect = 1
+      Case "5 Seconds"
+        longSelect = True
+        Unlimited = False
+        longBySelect = 5
+        TxtLong.Enabled = False
+        My.Settings.LongSelect = 2
+      Case "Unlimited"
+        longSelect = True
+        Unlimited = True
+        TxtLong.Enabled = False
+        My.Settings.LongSelect = 3
+      Case "Custom..."
+        longSelect = False
+        Unlimited = False
+        TxtLong.Enabled = True
+        My.Settings.LongSelect = 0
+    End Select
+    ValLong()
   End Sub
 
   Private Sub RunningKey_Tick(sender As Object, e As EventArgs) Handles RunningKey.Tick
@@ -137,19 +203,10 @@ Public Class Form1
     My.Settings.TimeRepeat = Repeat
     My.Settings.TimeLong = LongMine
 
-    If InvDelay = 0 Then
-      Label7.Text = "AutoClick not running but input null"
-    Else
-      If InvDelay < 200 Then
-        Label7.Text = "AutoClick not running when setting to minimal"
-      ElseIf InvDelay > 99999 Then
-        Label7.Text = "AutoClick not running when setting to maximal"
-      Else
-        Label7.Text = "Press (" + KeysString + ") for play and Stop when in Minecraft World"
-        If Me.WindowState = FormWindowState.Minimized Then
-          Runing()
-        End If
-      End If
+    Label7.Text = "Press (" + KeysString + ") for play and Stop when in Minecraft World"
+
+    If Me.WindowState = FormWindowState.Minimized Then
+      Runing()
     End If
   End Sub
 
@@ -160,23 +217,13 @@ Public Class Form1
     FrmAbout.ShowDialog()
   End Sub
 
-  Private Sub TxtDelay_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtDelay.KeyPress, TxtLong.KeyPress, TxtRepeat.KeyPress
-    'e.Handled = Not (Char.IsDigit(e.KeyChar) Or Char.IsControl(e.KeyChar) Or e.KeyChar = ",")
-    e.Handled = Not (Char.IsDigit(e.KeyChar) Or Char.IsControl(e.KeyChar))
-  End Sub
-
   Private Sub Form1_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
     If Me.WindowState = FormWindowState.Minimized Then
-      If TxtDelay.Text = "" Then
-        TxtDelay.Text = 0
-      End If
-      If TxtLong.Text = "" Then
-        TxtLong.Text = 0
-      End If
-      If TxtRepeat.Text = "" Then
-        TxtRepeat.Text = 0
-      End If
+      TxtDelay_ValueChanged(sender, e)
+      TxtLong_ValueChanged(sender, e)
+      TxtRepeat_ValueChanged(sender, e)
 
+      My.Settings.Save()
       If My.Settings.hide = True Then
         Me.Hide()
       End If
@@ -213,73 +260,7 @@ Public Class Form1
   End Sub
 
   Private Sub ComboLongClick_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboLongClick.SelectedIndexChanged
-    If ComboLongClick.Text = "Custom..." Then
-      My.Settings.LongSelect = 0
-    ElseIf ComboLongClick.Text = "3 Seconds" Then
-      My.Settings.LongSelect = 1
-    ElseIf ComboLongClick.Text = "5 Seconds" Then
-      My.Settings.LongSelect = 2
-    ElseIf ComboLongClick.Text = "Unlimited" Then
-      My.Settings.LongSelect = 3
-    End If
-
-    If ComboLongClick.Text = "Custom..." Then
-      TxtLong.Enabled = True
-    Else
-      TxtLong.Enabled = False
-    End If
-
-    If ComboLongClick.Text = "3 Seconds" Then
-      TxtLong.Text = 3
-    ElseIf ComboLongClick.Text = "5 Seconds" Then
-      TxtLong.Text = 5
-    ElseIf ComboLongClick.Text = "Unlimited" Then
-      TxtLong.Text = 0
-    End If
-
-    If My.Settings.mode = 2 Then
-      If LongMine = 0 Then
-        TxtDelay.Enabled = False
-        TxtRepeat.Enabled = False
-        CheckBox1.Enabled = False
-      Else
-        TxtDelay.Enabled = True
-        CheckBox1.Enabled = True
-        If CheckBox1.Checked = False Then
-          TxtRepeat.Enabled = False
-        Else
-          TxtRepeat.Enabled = True
-        End If
-      End If
-    End If
-  End Sub
-
-  Private Sub TxtLong_TextChanged(sender As Object, e As EventArgs) Handles TxtLong.TextChanged
-    If My.Settings.mode <> 2 Then
-      Return
-    End If
-
-    Select Case TxtLong.Text
-      Case ""
-        LongMine = 0
-      Case Else
-        LongMine = TxtLong.Text
-    End Select
-
-    If LongMine = 0 Then
-
-      TxtDelay.Enabled = False
-      TxtRepeat.Enabled = False
-      CheckBox1.Enabled = False
-    Else
-      TxtDelay.Enabled = True
-      CheckBox1.Enabled = True
-      If CheckBox1.Checked = False Then
-        TxtRepeat.Enabled = False
-      Else
-        TxtRepeat.Enabled = True
-      End If
-    End If
+    ClickModes()
   End Sub
 
   Private Sub AFKFish()
@@ -308,47 +289,7 @@ Public Class Form1
   End Sub
 
   Private Sub ComboBoxClick_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxClick.SelectedIndexChanged
-    'Change Click mode
-    If ComboBoxClick.Text = "AFK Fish (Right)" Then
-      My.Settings.mode = 1
-      ComboLongClick.Enabled = False
-      TxtLong.Enabled = False
-
-      CheckBox1.Enabled = True
-      TxtRepeat.Enabled = True
-      Select Case CheckBox1.Checked
-        Case True
-          TxtRepeat.Enabled = True
-        Case Else
-          TxtRepeat.Enabled = False
-      End Select
-
-      NotifyIcon1.Icon = My.Resources.fishoff
-    ElseIf ComboBoxClick.Text = "Auto Coublestone (Left)" Then
-      My.Settings.mode = 2
-      ComboLongClick.Enabled = True
-      Select Case My.Settings.LongSelect
-        Case 0
-          TxtLong.Enabled = True
-        Case Else
-          TxtLong.Enabled = False
-      End Select
-      NotifyIcon1.Icon = My.Resources.mineoff
-
-      If TxtLong.Text = 0 Then
-        TxtDelay.Enabled = False
-        TxtRepeat.Enabled = False
-        CheckBox1.Enabled = False
-      Else
-        TxtDelay.Enabled = True
-        CheckBox1.Enabled = True
-        If CheckBox1.Checked = False Then
-          TxtRepeat.Enabled = False
-        Else
-          TxtRepeat.Enabled = True
-        End If
-      End If
-    End If
+    Modes()
   End Sub
 
   Private Sub KeyEnabled()
@@ -368,63 +309,114 @@ Public Class Form1
         NotifyIcon1.Icon = My.Resources.fishoff
       End If
     ElseIf My.Settings.mode = 2 Then
-      Select Case TxtLong.Text
-        Case 0
-          If Clickers = True Then
-            mouse_event(&H4, 0, 0, 0, 1)
-            Clickers = False
-            NotifyIcon1.Icon = My.Resources.mineoff
-          Else
-            Clickers = True
-            NotifyIcon1.Icon = My.Resources.mineon
-            mouse_event(&H2, 0, 0, 0, 1)
-          End If
-        Case Else
-          If CheckBox1.Checked = False Or Repeat = 0 Then
-            repeatEnabled = False
-            Breaking()
-          Else
-            repeatEnabled = True
-            BreakRepeat()
-          End If
+
+      Select Case Clickers
+        Case True
+          Clickers = False
+          LeftFuncion.Enabled = False
+          DelayRunning.Enabled = False
+          NotifyIcon1.Icon = My.Resources.mineoff
+        Case False
+          Clickers = True
+          NotifyIcon1.Icon = My.Resources.mineon
       End Select
+
+      If Unlimited = True Then
+        UnlimitedBreak()
+      Else
+        Select Case longSelect
+          Case True
+            SecVal = longBySelect
+            milLong = False
+            MilVal = 0
+          Case False
+            MilSecCheck()
+        End Select
+
+        BreakRepeat()
+      End If
+    End If
+  End Sub
+
+  Private Sub MilSecCheck()
+    If LongMine.ToString.Contains(",") Then
+      milLong = True
+
+      Dim SplitLong() As String = LongMine.Split(",")
+      SecVal = SplitLong(0)
+      Integer.TryParse(SplitLong(1), MilVal)
+
+      MilVal *= 100
+      MsgBox(MilVal)
+    Else
+      milLong = False
+      MilVal = 0
+      SecVal = LongMine
+    End If
+  End Sub
+
+  Private Sub UnlimitedBreak()
+    If Clickers = False Then
+      mouse_event(&H4, 0, 0, 0, 1) ' cursor goes up
+    Else
+      mouse_event(&H2, 0, 0, 0, 1) 'cursor will go down (like a click)
     End If
   End Sub
 
   Private Sub BreakRepeat()
-    If Clickers = False Then
-      Clickers = True
-      NotifyIcon1.Icon = My.Resources.mineon
+    If CheckBox1.Checked = True Then
+      repeatEnabled = True
       getRepeat = Repeat - 1
-
-      getSec = LongMine - 1
-      LeftFuncion.Enabled = True
-
-      mouse_event(&H2, 0, 0, 0, 1)
     Else
-      DelayRunning.Enabled = False
-      LeftFuncion.Enabled = False
-      mouse_event(&H4, 0, 0, 0, 1)
+      repeatEnabled = False
+    End If
 
-      Clickers = False
-      NotifyIcon1.Icon = My.Resources.mineoff
+    Breaking()
+  End Sub
+
+  Sub Breaking()
+    If Clickers = True Then
+      DelayRunning.Interval = InvDelay
+      LeftFuncion.Interval = 1000
+      getSec = SecVal - 1
+      LeftFuncion.Enabled = True
+      mouse_event(&H2, 0, 0, 0, 1) 'cursor will go down (like a click)
     End If
   End Sub
 
-  Private Sub FishClicker()
-    AFKFish()
-    If CheckBox1.Checked = False Or Repeat = 0 Then
-      repeatEnabled = False
-    Else
-      repeatEnabled = True
-      getRepeat = Repeat - 1
-    End If
-    DelayRunning.Enabled = True
+  Private Sub LeftFuncion_Tick(sender As Object, e As EventArgs) Handles LeftFuncion.Tick
+    Select Case getSec
+      Case 0
+        Select Case milLong
+          Case True
+            LeftFuncion.Interval = MilVal
+            milLong = False
+          Case False
+            LeftFuncion.Enabled = False
+            LeftFuncion.Interval = 1000
+            mouse_event(&H4, 0, 0, 0, 1) ' cursor goes up
+
+            Select Case repeatEnabled
+              Case True
+                If getRepeat < 1 Then
+                  Clickers = False
+                  NotifyIcon1.Icon = My.Resources.mineoff
+                Else
+                  getRepeat -= 1
+                  DelayRunning.Enabled = True
+                End If
+              Case False
+                DelayRunning.Enabled = True
+            End Select
+        End Select
+      Case Else
+        getSec -= 1
+    End Select
   End Sub
 
   Private Sub TimerFishing_Tick(sender As Object, e As EventArgs) Handles DelayRunning.Tick
-    'Untuk Afk Fish
     If My.Settings.mode = 1 Then
+      'Untuk Afk Fish
 
       If repeatEnabled = True Then
         Select Case getRepeat
@@ -440,84 +432,42 @@ Public Class Form1
         AFKFish()
       End If
     Else
-      If repeatEnabled = False Then
-        DelayRunning.Enabled = False
-        LeftFuncion.Enabled = True
-        getSec = LongMine - 1
-        mouse_event(&H2, 0, 0, 0, 1)
-      Else
-        Select Case getRepeat
-          Case 0
-            DelayRunning.Enabled = False
-            Clickers = False
-            NotifyIcon1.Icon = My.Resources.mineoff
-          Case Else
-            getRepeat -= 1
-
-            DelayRunning.Enabled = False
-            LeftFuncion.Enabled = True
-            getSec = LongMine - 1
-            mouse_event(&H2, 0, 0, 0, 1)
-        End Select
-      End If
-    End If
-  End Sub
-
-  Sub Breaking()
-    If Clickers = False Then
-      Clickers = True
-      NotifyIcon1.Icon = My.Resources.mineon
-      getSec = LongMine - 1
-      LeftFuncion.Enabled = True
-
-      mouse_event(&H2, 0, 0, 0, 1)
-    Else
+      ' Untuk Breaker
       DelayRunning.Enabled = False
-      LeftFuncion.Enabled = False
-      mouse_event(&H4, 0, 0, 0, 1)
+      getSec = SecVal
+      If MilVal > 0 Then
+        milLong = True
+      End If
 
-      Clickers = False
-      NotifyIcon1.Icon = My.Resources.mineoff
+      LeftFuncion.Enabled = True
+      mouse_event(&H2, 0, 0, 0, 1) 'cursor will go down (like a click)
     End If
   End Sub
 
-  Private Sub LeftFuncion_Tick(sender As Object, e As EventArgs) Handles LeftFuncion.Tick
-    Select Case getSec
-      Case 0
-        mouse_event(&H4, 0, 0, 0, 1)
-        DelayRunning.Enabled = True
-        LeftFuncion.Enabled = False
-      Case Else
-        getSec -= 1
-    End Select
+  Private Sub FishClicker()
+    AFKFish()
+    If CheckBox1.Checked = False Then
+      repeatEnabled = False
+    Else
+      repeatEnabled = True
+      getRepeat = Repeat - 1
+    End If
+    DelayRunning.Enabled = True
   End Sub
 
   Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-    Select Case CheckBox1.Checked
-      Case True
-        My.Settings.EnabledRepeat = True
-        TxtRepeat.Enabled = True
-      Case Else
-        TxtRepeat.Enabled = False
-        My.Settings.EnabledRepeat = False
-    End Select
+    Repeater()
   End Sub
 
-  Private Sub TxtDelay_TextChanged(sender As Object, e As EventArgs) Handles TxtDelay.TextChanged
-    Select Case TxtDelay.Text
-      Case ""
-        InvDelay = 0
-      Case Else
-        InvDelay = TxtDelay.Text
-    End Select
+  Private Sub TxtRepeat_ValueChanged(sender As Object, e As EventArgs) Handles TxtRepeat.ValueChanged
+    Repeat = TxtRepeat.Value
   End Sub
 
-  Private Sub TxtRepeat_TextChanged(sender As Object, e As EventArgs) Handles TxtRepeat.TextChanged
-    Select Case TxtRepeat.Text
-      Case ""
-        Repeat = 0
-      Case Else
-        Repeat = TxtRepeat.Text
-    End Select
+  Private Sub TxtDelay_ValueChanged(sender As Object, e As EventArgs) Handles TxtDelay.ValueChanged
+    InvDelay = TxtDelay.Value
+  End Sub
+
+  Private Sub TxtLong_ValueChanged(sender As Object, e As EventArgs) Handles TxtLong.ValueChanged
+    LongMine = TxtLong.Value
   End Sub
 End Class

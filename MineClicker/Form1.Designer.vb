@@ -28,17 +28,15 @@ Partial Class Form1
         Me.ComboBoxClick = New System.Windows.Forms.ComboBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TxtRepeat = New System.Windows.Forms.NumericUpDown()
+        Me.TxtLong = New System.Windows.Forms.NumericUpDown()
+        Me.TxtDelay = New System.Windows.Forms.NumericUpDown()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TxtRepeat = New System.Windows.Forms.TextBox()
-        Me.TxtDelay = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ComboLongClick = New System.Windows.Forms.ComboBox()
-        Me.TxtLong = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -60,6 +58,9 @@ Partial Class Form1
         Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.TxtRepeat, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtLong, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtDelay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -100,12 +101,11 @@ Partial Class Form1
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.TxtRepeat)
+        Me.GroupBox2.Controls.Add(Me.TxtDelay)
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.LinkLabel1)
         Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.TxtRepeat)
-        Me.GroupBox2.Controls.Add(Me.TxtDelay)
-        Me.GroupBox2.Controls.Add(Me.Label6)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 86)
@@ -115,10 +115,43 @@ Partial Class Form1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "General"
         '
+        'TxtRepeat
+        '
+        Me.TxtRepeat.Location = New System.Drawing.Point(181, 40)
+        Me.TxtRepeat.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
+        Me.TxtRepeat.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.TxtRepeat.Name = "TxtRepeat"
+        Me.TxtRepeat.Size = New System.Drawing.Size(120, 20)
+        Me.TxtRepeat.TabIndex = 8
+        Me.TxtRepeat.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'TxtLong
+        '
+        Me.TxtLong.DecimalPlaces = 1
+        Me.TxtLong.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.TxtLong.Location = New System.Drawing.Point(179, 20)
+        Me.TxtLong.Maximum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.TxtLong.Minimum = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.TxtLong.Name = "TxtLong"
+        Me.TxtLong.Size = New System.Drawing.Size(55, 20)
+        Me.TxtLong.TabIndex = 8
+        Me.TxtLong.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'TxtDelay
+        '
+        Me.TxtDelay.Increment = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.TxtDelay.Location = New System.Drawing.Point(9, 40)
+        Me.TxtDelay.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
+        Me.TxtDelay.Minimum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.TxtDelay.Name = "TxtDelay"
+        Me.TxtDelay.Size = New System.Drawing.Size(105, 20)
+        Me.TxtDelay.TabIndex = 8
+        Me.TxtDelay.Value = New Decimal(New Integer() {200, 0, 0, 0})
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(82, 36)
+        Me.Label8.Location = New System.Drawing.Point(6, 65)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(62, 13)
         Me.Label8.TabIndex = 7
@@ -137,35 +170,11 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(263, 36)
+        Me.Label5.Location = New System.Drawing.Point(262, 65)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(43, 13)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "x Times"
-        '
-        'TxtRepeat
-        '
-        Me.TxtRepeat.Location = New System.Drawing.Point(181, 33)
-        Me.TxtRepeat.MaxLength = 10
-        Me.TxtRepeat.Name = "TxtRepeat"
-        Me.TxtRepeat.Size = New System.Drawing.Size(76, 20)
-        Me.TxtRepeat.TabIndex = 2
-        '
-        'TxtDelay
-        '
-        Me.TxtDelay.Location = New System.Drawing.Point(9, 33)
-        Me.TxtDelay.Name = "TxtDelay"
-        Me.TxtDelay.Size = New System.Drawing.Size(67, 20)
-        Me.TxtDelay.TabIndex = 2
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(178, 56)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(74, 13)
-        Me.Label6.TabIndex = 1
-        Me.Label6.Text = "0 for Unlimited"
         '
         'Label3
         '
@@ -189,27 +198,10 @@ Partial Class Form1
         '
         Me.ComboLongClick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboLongClick.FormattingEnabled = True
-        Me.ComboLongClick.Location = New System.Drawing.Point(9, 37)
+        Me.ComboLongClick.Location = New System.Drawing.Point(6, 19)
         Me.ComboLongClick.Name = "ComboLongClick"
         Me.ComboLongClick.Size = New System.Drawing.Size(143, 21)
         Me.ComboLongClick.TabIndex = 3
-        '
-        'TxtLong
-        '
-        Me.TxtLong.Location = New System.Drawing.Point(158, 37)
-        Me.TxtLong.MaxLength = 9
-        Me.TxtLong.Name = "TxtLong"
-        Me.TxtLong.Size = New System.Drawing.Size(71, 20)
-        Me.TxtLong.TabIndex = 2
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 21)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(57, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Long Click"
         '
         'MenuStrip1
         '
@@ -306,7 +298,7 @@ Partial Class Form1
         Me.Label7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label7.Location = New System.Drawing.Point(12, 255)
+        Me.Label7.Location = New System.Drawing.Point(12, 248)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(320, 44)
         Me.Label7.TabIndex = 6
@@ -319,12 +311,11 @@ Partial Class Form1
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Controls.Add(Me.ComboLongClick)
-        Me.GroupBox3.Controls.Add(Me.Label2)
         Me.GroupBox3.Controls.Add(Me.TxtLong)
+        Me.GroupBox3.Controls.Add(Me.ComboLongClick)
         Me.GroupBox3.Location = New System.Drawing.Point(12, 182)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(322, 70)
+        Me.GroupBox3.Size = New System.Drawing.Size(320, 51)
         Me.GroupBox3.TabIndex = 7
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Left Click Settings"
@@ -332,7 +323,7 @@ Partial Class Form1
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(235, 40)
+        Me.Label9.Location = New System.Drawing.Point(241, 22)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(49, 13)
         Me.Label9.TabIndex = 7
@@ -344,9 +335,9 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label4.Location = New System.Drawing.Point(12, 305)
+        Me.Label4.Location = New System.Drawing.Point(1, 309)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(320, 27)
+        Me.Label4.Size = New System.Drawing.Size(344, 27)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Status: ..."
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -373,6 +364,9 @@ Partial Class Form1
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.TxtRepeat, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtLong, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtDelay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ContextMenuStrip1.ResumeLayout(False)
@@ -386,12 +380,8 @@ Partial Class Form1
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents ComboLongClick As ComboBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents TxtLong As TextBox
-    Friend WithEvents TxtRepeat As TextBox
-    Friend WithEvents Label6 As Label
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
@@ -402,7 +392,6 @@ Partial Class Form1
     Friend WithEvents DelayRunning As Timer
     Friend WithEvents RunningKey As Timer
     Friend WithEvents Label7 As Label
-    Friend WithEvents TxtDelay As TextBox
     Friend WithEvents LeftFuncion As Timer
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
@@ -416,4 +405,7 @@ Partial Class Form1
     Friend WithEvents Label9 As Label
     Friend WithEvents ComboBoxClick As ComboBox
     Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents TxtDelay As NumericUpDown
+    Friend WithEvents TxtRepeat As NumericUpDown
+    Friend WithEvents TxtLong As NumericUpDown
 End Class

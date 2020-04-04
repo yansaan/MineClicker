@@ -92,7 +92,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
         Public Property TimeRepeat() As Integer
             Get
                 Return CType(Me("TimeRepeat"),Integer)
@@ -164,10 +164,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("4")>  _
-        Public Property TimeLong() As Integer
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property TimeLong() As String
             Get
-                Return CType(Me("TimeLong"),Integer)
+                Return CType(Me("TimeLong"),String)
             End Get
             Set
                 Me("TimeLong") = value

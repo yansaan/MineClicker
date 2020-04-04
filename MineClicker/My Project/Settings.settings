@@ -12,7 +12,7 @@
       <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="TimeRepeat" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="mode" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -29,8 +29,8 @@
     <Setting Name="EnabledRepeat" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="TimeLong" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">4</Value>
+    <Setting Name="TimeLong" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="LongSelect" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
