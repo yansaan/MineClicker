@@ -40,18 +40,18 @@ Public Class Form1
 
   ' Auto Click Function
   Dim Clickers As Boolean = False
-  Dim InvDelay As Integer
+  ' Dim InvDelay As Integer
 
   ' Repeat Function
   Dim Repeat As Integer
   Dim repeatEnabled As Boolean
-  Private getRepeat As Integer
-  Dim TimeRepeat As Integer
+  ' Private getRepeat As Integer
+  ' Dim TimeRepeat As Integer
 
   ' Left Running Function
   Dim secBreak As Integer
-  Private LongMine As String
-  Private getSec As Integer
+  ' Private LongMine As String
+  'Private getSec As Integer
 
   Private Unlimited As Boolean = False
   Dim longBySelect As Integer
@@ -60,6 +60,7 @@ Public Class Form1
   Private SecVal As Integer
   Private MilVal As Integer
   Private milLong As Boolean = False
+  Private MinimizeInStart As Boolean
 
   Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     If AlreadyRunning() Then
@@ -71,7 +72,21 @@ Public Class Form1
     MessageBoxIcon.Exclamation)
       Me.Close()
     Else
-      NotifyIcon1.Visible = True
+      TopFrm1()
+
+      If (My.Application.CommandLineArgs.Count > 0) Then
+        If My.Application.CommandLineArgs(0) = "-m" Then
+          MinimizeInStart = True
+        End If
+      End If
+
+      Select Case My.Settings.EnabledRepeat
+        Case True
+          CheckBox1.Checked = True
+      End Select
+
+      'MsgBox(My.Settings.TimeDelay)
+
 
       ComboLongClick.Items.Add("3 Seconds")
       ComboLongClick.Items.Add("5 Seconds")
@@ -99,22 +114,18 @@ Public Class Form1
           ComboBoxClick.Text = "Auto Coublestone (Left)"
       End Select
 
-      Try
-        LongMine = My.Settings.TimeLong
-        TxtLong.Value = LongMine
-      Catch ex As Exception
-        My.Settings.TimeLong = TxtLong.Minimum
-        LongMine = TxtLong.Minimum
-        TxtLong.Value = TxtLong.Minimum
-      End Try
-
-      InvDelay = My.Settings.TimeDelay
-      TxtDelay.Value = InvDelay
-
-      Repeat = My.Settings.TimeRepeat
-      TxtRepeat.Value = Repeat
-
       Modes()
+
+      NotifyIcon1.Visible = True
+      Dim SetLong = My.Settings.TimeLong
+      Dim SetDelay = My.Settings.TimeDelay
+      Dim SetRepeat = My.Settings.TimeRepeat
+
+      TxtDelay.Value = SetDelay
+      TxtLong.Value = SetLong
+      TxtRepeat.Value = SetRepeat
+
+      RunningKey.Enabled = True
     End If
   End Sub
 
@@ -140,7 +151,7 @@ Public Class Form1
       Case True
         My.Settings.EnabledRepeat = True
         TxtRepeat.Enabled = True
-      Case Else
+      Case False
         My.Settings.EnabledRepeat = False
         TxtRepeat.Enabled = False
     End Select
@@ -199,16 +210,31 @@ Public Class Form1
     keyPush = My.Settings.KeyPush
     KeysString = My.Settings.KeyString
 
-    My.Settings.TimeDelay = InvDelay
-    My.Settings.TimeRepeat = Repeat
-    My.Settings.TimeLong = LongMine
 
-    Label7.Text = "Press (" + KeysString + ") for play and Stop when in Minecraft World"
+    If MinimizeInStart = True Then
+      Me.WindowState = FormWindowState.Minimized
+      MinimizeInStart = False
+    End If
+
+    My.Settings.TimeRepeat = TxtRepeat.Value
+    My.Settings.TimeDelay = TxtDelay.Value
+    My.Settings.TimeLong = TxtLong.Value
+
+    Label7.Text = "Press (" + KeysString + ") for play and Stop"
 
     If Me.WindowState = FormWindowState.Minimized Then
       Runing()
     End If
   End Sub
+
+  'Private Sub TxtRepeat_ValueChanged(sender As Object, e As EventArgs) Handles TxtRepeat.ValueChanged
+  'End Sub
+
+  'Private Sub TxtDelay_ValueChanged(sender As Object, e As EventArgs) Handles TxtDelay.ValueChanged
+  'End Sub
+
+  'Private Sub TxtLong_ValueChanged(sender As Object, e As EventArgs) Handles TxtLong.ValueChanged
+  'End Sub
 
   Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
     SettUtama.ShowDialog()
@@ -219,9 +245,9 @@ Public Class Form1
 
   Private Sub Form1_Deactivate(sender As Object, e As EventArgs) Handles MyBase.Deactivate
     If Me.WindowState = FormWindowState.Minimized Then
-      TxtDelay_ValueChanged(sender, e)
-      TxtLong_ValueChanged(sender, e)
-      TxtRepeat_ValueChanged(sender, e)
+      'TxtDelay_ValueChanged(sender, e)
+      'TxtLong_ValueChanged(sender, e)
+      'TxtRepeat_ValueChanged(sender, e)
 
       My.Settings.Save()
       If My.Settings.hide = True Then
@@ -232,6 +258,13 @@ Public Class Form1
 
   Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
     My.Settings.Save()
+    RunningKey.Enabled = False
+    'TxtDelay_ValueChanged(sender, e)
+    'TxtLong_ValueChanged(sender, e)
+    'TxtRepeat_ValueChanged(sender, e)
+
+    'MsgBox(My.Settings.TimeDelay)
+
   End Sub
 
   Private Sub NotifyIcon1_DoubleClick(sender As Object, e As EventArgs) Handles NotifyIcon1.DoubleClick
@@ -293,65 +326,92 @@ Public Class Form1
   End Sub
 
   Private Sub KeyEnabled()
-    'Check click
-    If My.Settings.mode = 1 Then
-      'Check ON OFF
-      If Clickers = False Then
-        'Change Icon and setting
-        DelayRunning.Interval = InvDelay
+    Select Case Clickers
+      Case False
         Clickers = True
-        NotifyIcon1.Icon = My.Resources.fishon
-        'Check repeat
-        FishClicker()
-      Else
-        DelayRunning.Enabled = False
-        Clickers = False
-        NotifyIcon1.Icon = My.Resources.fishoff
-      End If
-    ElseIf My.Settings.mode = 2 Then
-
-      Select Case Clickers
-        Case True
-          Clickers = False
-          LeftFuncion.Enabled = False
-          DelayRunning.Enabled = False
-          NotifyIcon1.Icon = My.Resources.mineoff
-        Case False
-          Clickers = True
-          NotifyIcon1.Icon = My.Resources.mineon
-      End Select
-
-      If Unlimited = True Then
-        UnlimitedBreak()
-      Else
-        Select Case longSelect
-          Case True
-            SecVal = longBySelect
-            milLong = False
-            MilVal = 0
-          Case False
-            MilSecCheck()
+        Select Case My.Settings.mode
+          Case 1
+            NotifyIcon1.Icon = My.Resources.fishon
+          Case 2
+            NotifyIcon1.Icon = My.Resources.mineon
         End Select
 
-        BreakRepeat()
-      End If
+        DelayRunning.Interval = TxtDelay.Text
+      Case True
+        Disabled()
+    End Select
+
+    If CheckBox1.Checked = True Then
+      Repeated()
+    Else
+      Clicked()
     End If
   End Sub
 
+  Private Sub Disabled()
+    Clickers = False
+    Select Case My.Settings.mode
+      Case 1
+        NotifyIcon1.Icon = My.Resources.fishoff
+      Case 2
+        NotifyIcon1.Icon = My.Resources.mineoff
+    End Select
+
+    DelayRunning.Enabled = False
+    LeftFuncion.Enabled = False
+    milLong = False
+    repeatEnabled = False
+  End Sub
+
+  Private Sub Clicked()
+    Select Case My.Settings.mode
+      Case 1
+        If Clickers = True Then
+          AFKFish()
+          DelayRunning.Enabled = True
+        End If
+      Case 2
+        If Unlimited = True Then
+          UnlimitedBreak()
+        Else
+          If longSelect = True Then
+            SecVal = longBySelect
+          Else
+            MilSecCheck()
+            settingSeconds()
+          End If
+        End If
+    End Select
+  End Sub
+
+  Private Sub settingSeconds()
+    Select Case milLong
+      Case True
+        secBreak = SecVal
+      Case Else
+        secBreak = SecVal - 1
+    End Select
+
+    LeftFuncion.Interval = 1000
+    LeftFuncion.Enabled = True
+    mouse_event(&H2, 0, 0, 0, 1)
+  End Sub
+
+  Private Sub Repeated()
+    repeatEnabled = True
+    Repeat = TxtRepeat.Value - 1
+
+    Clicked()
+  End Sub
+
   Private Sub MilSecCheck()
-    If LongMine.ToString.Contains(",") Then
+    If TxtLong.Value.ToString.Contains(",") Then
+      Dim seconds() = TxtLong.Value.ToString.Split(",")
+      SecVal = seconds(0)
+      MilVal = seconds(1)
       milLong = True
-
-      Dim SplitLong() As String = LongMine.Split(",")
-      SecVal = SplitLong(0)
-      Integer.TryParse(SplitLong(1), MilVal)
-
-      MilVal *= 100
-      MsgBox(MilVal)
     Else
-      milLong = False
-      MilVal = 0
-      SecVal = LongMine
+      SecVal = TxtLong.Value
     End If
   End Sub
 
@@ -363,111 +423,64 @@ Public Class Form1
     End If
   End Sub
 
-  Private Sub BreakRepeat()
-    If CheckBox1.Checked = True Then
-      repeatEnabled = True
-      getRepeat = Repeat - 1
-    Else
-      repeatEnabled = False
-    End If
-
-    Breaking()
-  End Sub
-
-  Sub Breaking()
-    If Clickers = True Then
-      DelayRunning.Interval = InvDelay
-      LeftFuncion.Interval = 1000
-      getSec = SecVal - 1
-      LeftFuncion.Enabled = True
-      mouse_event(&H2, 0, 0, 0, 1) 'cursor will go down (like a click)
-    End If
-  End Sub
-
   Private Sub LeftFuncion_Tick(sender As Object, e As EventArgs) Handles LeftFuncion.Tick
-    Select Case getSec
+    Select Case secBreak
       Case 0
-        Select Case milLong
-          Case True
-            LeftFuncion.Interval = MilVal
-            milLong = False
+        mouse_event(&H4, 0, 0, 0, 1)
+        LeftFuncion.Enabled = False
+        Select Case repeatEnabled
           Case False
-            LeftFuncion.Enabled = False
-            LeftFuncion.Interval = 1000
-            mouse_event(&H4, 0, 0, 0, 1) ' cursor goes up
-
-            Select Case repeatEnabled
-              Case True
-                If getRepeat < 1 Then
-                  Clickers = False
-                  NotifyIcon1.Icon = My.Resources.mineoff
-                Else
-                  getRepeat -= 1
-                  DelayRunning.Enabled = True
-                End If
-              Case False
+            DelayRunning.Enabled = True
+          Case True
+            Select Case Repeat
+              Case 0
+                Disabled()
+              Case Else
+                Repeat -= 1
                 DelayRunning.Enabled = True
             End Select
         End Select
+      Case 1
+        secBreak -= 1
+        If milLong = True Then
+          LeftFuncion.Interval = MilVal * 100
+        End If
       Case Else
-        getSec -= 1
+        secBreak -= 1
     End Select
   End Sub
 
-  Private Sub TimerFishing_Tick(sender As Object, e As EventArgs) Handles DelayRunning.Tick
-    If My.Settings.mode = 1 Then
-      'Untuk Afk Fish
-
-      If repeatEnabled = True Then
-        Select Case getRepeat
-          Case 0
-            DelayRunning.Enabled = False
-            Clickers = False
-            NotifyIcon1.Icon = My.Resources.fishoff
-          Case Else
+  Private Sub DelayRunning_Tick(sender As Object, e As EventArgs) Handles DelayRunning.Tick
+    Select Case My.Settings.mode
+      Case 1
+        Select Case repeatEnabled
+          Case False
             AFKFish()
-            getRepeat -= 1
+          Case True
+            Select Case Repeat
+              Case 0
+                Disabled()
+              Case Else
+                Repeat -= 1
+                AFKFish()
+            End Select
         End Select
-      Else
-        AFKFish()
-      End If
-    Else
-      ' Untuk Breaker
-      DelayRunning.Enabled = False
-      getSec = SecVal
-      If MilVal > 0 Then
-        milLong = True
-      End If
-
-      LeftFuncion.Enabled = True
-      mouse_event(&H2, 0, 0, 0, 1) 'cursor will go down (like a click)
-    End If
-  End Sub
-
-  Private Sub FishClicker()
-    AFKFish()
-    If CheckBox1.Checked = False Then
-      repeatEnabled = False
-    Else
-      repeatEnabled = True
-      getRepeat = Repeat - 1
-    End If
-    DelayRunning.Enabled = True
+      Case 2
+        DelayRunning.Enabled = False
+        settingSeconds()
+    End Select
   End Sub
 
   Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
     Repeater()
   End Sub
 
-  Private Sub TxtRepeat_ValueChanged(sender As Object, e As EventArgs) Handles TxtRepeat.ValueChanged
-    Repeat = TxtRepeat.Value
-  End Sub
-
-  Private Sub TxtDelay_ValueChanged(sender As Object, e As EventArgs) Handles TxtDelay.ValueChanged
-    InvDelay = TxtDelay.Value
-  End Sub
-
-  Private Sub TxtLong_ValueChanged(sender As Object, e As EventArgs) Handles TxtLong.ValueChanged
-    LongMine = TxtLong.Value
+  Private Sub ResetSettingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetSettingToolStripMenuItem.Click
+    Dim msg As MsgBoxResult = MsgBox("When click yes, all settings are reset to default and quit Application. Continue?", MsgBoxStyle.YesNo + MsgBoxStyle.Exclamation, "Reseting")
+    Select Case msg
+      Case MsgBoxResult.Yes
+        My.Settings.Reset()
+        Me.Close()
+    End Select
   End Sub
 End Class

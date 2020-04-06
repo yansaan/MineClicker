@@ -2,14 +2,19 @@
   Dim KeysData As Integer
   Dim KeyInput As String
   Dim keyResult As String
+  Public KeySet As Boolean
+  Private ChangeSetting As Boolean
 
   Dim reset As Boolean
 
   Private Sub FormSettings_Load(sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     TopSettKey()
 
-    KeysData = My.Settings.KeyPush
-    KeyInput = My.Settings.KeyString
+    If KeySet = 0 Then
+      KeysData = My.Settings.KeyPush
+      KeyInput = My.Settings.KeyString
+      ComboBox1.Enabled = False
+    End If
 
     If Not My.Settings.KeyPush = 117 Then
       Button2.Enabled = True
@@ -18,6 +23,8 @@
     Label2.Text = KeysData
     LabelPress.Text = KeyInput
     Label1.Text = ""
+
+    Button1.Enabled = False
     AddHandler Me.KeyUp, AddressOf SavePress
   End Sub
 
@@ -80,6 +87,8 @@
 
       Label2.Text = KeysData
       LabelPress.Text = KeyInput
+      Button1.Enabled = True
+      ChangeSetting = True
     End If
   End Sub
 
@@ -92,24 +101,35 @@
   End Sub
 
   Private Sub FormSettings_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-    SettUtama.ListBox1.Items.Clear()
     SettUtama.ListKey()
   End Sub
 
   Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-    My.Settings.KeyPush = KeysData
-    My.Settings.KeyString = KeyInput
+    Select Case KeySet
+      Case 0
+        My.Settings.KeyPush = KeysData
+        My.Settings.KeyString = KeyInput
+    End Select
+    ChangeSetting = False
     Me.Close()
   End Sub
 
   Private Sub FormSettings_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-    If Not My.Settings.KeyPush = KeysData Then
+    If ChangeSetting = True Then
       Dim result As Integer = MsgBox("Are you saving key before exit?", MsgBoxStyle.Information + MsgBoxStyle.YesNoCancel, "Settings")
       If result = DialogResult.Yes Then
         Button1_Click(sender, e)
+        ChangeSetting = False
       ElseIf result = DialogResult.Cancel Then
         e.Cancel = True
+      Else
+        ChangeSetting = False
       End If
+    End If
+
+    If e.Cancel = False Then
+      Dim settings As New SettUtama
+      settings.SettUtama_Load(sender, e)
     End If
   End Sub
 End Class

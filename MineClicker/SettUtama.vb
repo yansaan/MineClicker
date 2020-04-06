@@ -4,7 +4,7 @@ Imports System.Environment
 
 Public Class SettUtama
   Dim KeysString As String
-  Private Sub SettUtama_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+  Public Sub SettUtama_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     TopSetting()
 
     KeysString = My.Settings.KeyString
@@ -29,6 +29,18 @@ Public Class SettUtama
       CheckBox2.Checked = True
     End If
     makeSoutcut()
+
+    ListBox1.Items.Clear()
+    KeyExperimental()
+  End Sub
+
+  Private Sub KeyExperimental()
+    ' Disabled MineClicker
+    ' Change Interval 50
+    ' Change Interval 100
+    ' Change Repeat
+    CheckBox5.Enabled = False
+    GroupBox2.Enabled = False
   End Sub
 
   Sub makeSoutcut()
@@ -37,7 +49,7 @@ Public Class SettUtama
 
     Dim Shortcut As IWshShortcut = CType(WshShell.CreateShortcut(Path.Combine(ShortcutPath, Application.ProductName) & ".lnk"), IWshShortcut)
     Shortcut.TargetPath = Application.ExecutablePath
-    Shortcut.Arguments = "-set"
+    Shortcut.Arguments = "-m"
     Shortcut.WorkingDirectory = Application.StartupPath
     Shortcut.WindowStyle = ProcessWindowStyle.Hidden
     Shortcut.Description = ""
@@ -45,12 +57,13 @@ Public Class SettUtama
   End Sub
 
   Public Sub ListKey()
-    ListBox1.Items.Add("1. Start/Stop Auto Click   (" + My.Settings.KeyString + ")")
-    ListBox1.Items.Add("2. Enabled   (Alt + " + My.Settings.KeyString + ")")
+    Label1.Text = My.Settings.KeyString
   End Sub
 
   Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
     FormSettings.ShowDialog()
+    Dim frmKey As New FormSettings
+    frmKey.KeySet = 0
   End Sub
 
   Private Sub SettUtama_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -65,23 +78,15 @@ Public Class SettUtama
     End If
   End Sub
 
-  'Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs)
-  '  If CheckBox2.Checked = True Then
-  '    My.Settings.indicator = True
-  '    CheckBox1.Enabled = True
-  '  Else
-  '    My.Settings.indicator = False
-  '    CheckBox1.Enabled = False
-  '    My.Settings.hide = False
-  '  End If
-  'End Sub
-
   Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
     If CheckBox3.Checked = True Then
       My.Settings.FrontEnable = True
     Else
       My.Settings.FrontEnable = False
     End If
+
+    TopFrm1()
+    TopSetting()
   End Sub
 
   Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged

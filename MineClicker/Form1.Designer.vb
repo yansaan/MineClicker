@@ -29,17 +29,18 @@ Partial Class Form1
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TxtRepeat = New System.Windows.Forms.NumericUpDown()
-        Me.TxtLong = New System.Windows.Forms.NumericUpDown()
         Me.TxtDelay = New System.Windows.Forms.NumericUpDown()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.TxtLong = New System.Windows.Forms.NumericUpDown()
         Me.ComboLongClick = New System.Windows.Forms.ComboBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResetSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TutorialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TextToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -59,8 +60,8 @@ Partial Class Form1
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.TxtRepeat, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TxtLong, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TxtDelay, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TxtLong, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -125,18 +126,6 @@ Partial Class Form1
         Me.TxtRepeat.TabIndex = 8
         Me.TxtRepeat.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'TxtLong
-        '
-        Me.TxtLong.DecimalPlaces = 1
-        Me.TxtLong.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.TxtLong.Location = New System.Drawing.Point(179, 20)
-        Me.TxtLong.Maximum = New Decimal(New Integer() {60, 0, 0, 0})
-        Me.TxtLong.Minimum = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.TxtLong.Name = "TxtLong"
-        Me.TxtLong.Size = New System.Drawing.Size(55, 20)
-        Me.TxtLong.TabIndex = 8
-        Me.TxtLong.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
         'TxtDelay
         '
         Me.TxtDelay.Increment = New Decimal(New Integer() {50, 0, 0, 0})
@@ -146,7 +135,7 @@ Partial Class Form1
         Me.TxtDelay.Name = "TxtDelay"
         Me.TxtDelay.Size = New System.Drawing.Size(105, 20)
         Me.TxtDelay.TabIndex = 8
-        Me.TxtDelay.Value = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.TxtDelay.Value = New Decimal(New Integer() {300, 0, 0, 0})
         '
         'Label8
         '
@@ -194,6 +183,18 @@ Partial Class Form1
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Delay Click"
         '
+        'TxtLong
+        '
+        Me.TxtLong.DecimalPlaces = 1
+        Me.TxtLong.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.TxtLong.Location = New System.Drawing.Point(179, 20)
+        Me.TxtLong.Maximum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.TxtLong.Minimum = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.TxtLong.Name = "TxtLong"
+        Me.TxtLong.Size = New System.Drawing.Size(55, 20)
+        Me.TxtLong.TabIndex = 8
+        Me.TxtLong.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'ComboLongClick
         '
         Me.ComboLongClick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -214,7 +215,7 @@ Partial Class Form1
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.ResetSettingToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -222,8 +223,14 @@ Partial Class Form1
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.SettingsToolStripMenuItem.Text = "&Settings"
+        '
+        'ResetSettingToolStripMenuItem
+        '
+        Me.ResetSettingToolStripMenuItem.Name = "ResetSettingToolStripMenuItem"
+        Me.ResetSettingToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
+        Me.ResetSettingToolStripMenuItem.Text = "&Reset Setting"
         '
         'HelpToolStripMenuItem
         '
@@ -290,7 +297,6 @@ Partial Class Form1
         '
         'RunningKey
         '
-        Me.RunningKey.Enabled = True
         Me.RunningKey.Interval = 5
         '
         'Label7
@@ -335,9 +341,9 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label4.Location = New System.Drawing.Point(1, 309)
+        Me.Label4.Location = New System.Drawing.Point(-1, 309)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(344, 27)
+        Me.Label4.Size = New System.Drawing.Size(346, 27)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Status: ..."
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -365,8 +371,8 @@ Partial Class Form1
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.TxtRepeat, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TxtLong, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TxtDelay, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TxtLong, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ContextMenuStrip1.ResumeLayout(False)
@@ -408,4 +414,5 @@ Partial Class Form1
     Friend WithEvents TxtDelay As NumericUpDown
     Friend WithEvents TxtRepeat As NumericUpDown
     Friend WithEvents TxtLong As NumericUpDown
+    Friend WithEvents ResetSettingToolStripMenuItem As ToolStripMenuItem
 End Class

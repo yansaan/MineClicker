@@ -28,21 +28,28 @@ Partial Class SettUtama
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(136, 243)
+        Me.Button1.Location = New System.Drawing.Point(212, 15)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(119, 23)
+        Me.Button1.Size = New System.Drawing.Size(39, 23)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Set Default Key"
+        Me.Button1.Text = "Set"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'CheckBox1
@@ -50,9 +57,9 @@ Partial Class SettUtama
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Location = New System.Drawing.Point(24, 42)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(103, 17)
+        Me.CheckBox1.Size = New System.Drawing.Size(107, 17)
         Me.CheckBox1.TabIndex = 3
-        Me.CheckBox1.Text = "Minimize to Hide"
+        Me.CheckBox1.Text = "Minimize in Notify"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'CheckBox3
@@ -67,9 +74,9 @@ Partial Class SettUtama
         '
         'Label2
         '
-        Me.Label2.Location = New System.Drawing.Point(8, 207)
+        Me.Label2.Location = New System.Drawing.Point(8, 241)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(247, 33)
+        Me.Label2.Size = New System.Drawing.Size(247, 32)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Make sure the key you use doesn't interfere with other game / screen recorder"
         '
@@ -85,6 +92,7 @@ Partial Class SettUtama
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.CheckBox5)
         Me.TabPage1.Controls.Add(Me.CheckBox2)
         Me.TabPage1.Controls.Add(Me.CheckBox1)
         Me.TabPage1.Controls.Add(Me.CheckBox3)
@@ -95,6 +103,16 @@ Partial Class SettUtama
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "General"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'CheckBox5
+        '
+        Me.CheckBox5.AutoSize = True
+        Me.CheckBox5.Location = New System.Drawing.Point(24, 88)
+        Me.CheckBox5.Name = "CheckBox5"
+        Me.CheckBox5.Size = New System.Drawing.Size(96, 17)
+        Me.CheckBox5.TabIndex = 6
+        Me.CheckBox5.Text = "Advanced Key"
+        Me.CheckBox5.UseVisualStyleBackColor = True
         '
         'CheckBox2
         '
@@ -108,9 +126,9 @@ Partial Class SettUtama
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.ListBox1)
+        Me.TabPage2.Controls.Add(Me.GroupBox2)
+        Me.TabPage2.Controls.Add(Me.GroupBox1)
         Me.TabPage2.Controls.Add(Me.Label2)
-        Me.TabPage2.Controls.Add(Me.Button1)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -119,13 +137,53 @@ Partial Class SettUtama
         Me.TabPage2.Text = "HotKey"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.Button1)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 8)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(256, 51)
+        Me.GroupBox1.TabIndex = 4
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Play/Stop"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(13, 20)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "Label1"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.ListBox1)
+        Me.GroupBox2.Controls.Add(Me.Button2)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 66)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(256, 172)
+        Me.GroupBox2.TabIndex = 5
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Expemental (Only turn ON Advanced Key)"
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(212, 141)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(37, 23)
+        Me.Button2.TabIndex = 0
+        Me.Button2.Text = "Set"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(11, 16)
+        Me.ListBox1.Location = New System.Drawing.Point(6, 20)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(244, 186)
-        Me.ListBox1.TabIndex = 5
+        Me.ListBox1.Size = New System.Drawing.Size(243, 108)
+        Me.ListBox1.TabIndex = 1
         '
         'SettUtama
         '
@@ -141,6 +199,9 @@ Partial Class SettUtama
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -152,6 +213,11 @@ Partial Class SettUtama
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents ListBox1 As ListBox
     Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents CheckBox5 As CheckBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents ListBox1 As ListBox
 End Class
