@@ -74,6 +74,8 @@ Public Class Form1
     Else
       TopFrm1()
 
+      Label4.Text = "Status: Active"
+
       If (My.Application.CommandLineArgs.Count > 0) Then
         If My.Application.CommandLineArgs(0) = "-m" Then
           MinimizeInStart = True
@@ -216,13 +218,13 @@ Public Class Form1
       MinimizeInStart = False
     End If
 
-    My.Settings.TimeRepeat = TxtRepeat.Value
-    My.Settings.TimeDelay = TxtDelay.Value
-    My.Settings.TimeLong = TxtLong.Value
-
     Label7.Text = "Press (" + KeysString + ") for play and Stop"
 
     If Me.WindowState = FormWindowState.Minimized Then
+      My.Settings.TimeRepeat = TxtRepeat.Value
+      My.Settings.TimeDelay = TxtDelay.Value
+      My.Settings.TimeLong = TxtLong.Value
+
       Runing()
     End If
   End Sub
@@ -259,9 +261,10 @@ Public Class Form1
   Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
     My.Settings.Save()
     RunningKey.Enabled = False
-    'TxtDelay_ValueChanged(sender, e)
-    'TxtLong_ValueChanged(sender, e)
-    'TxtRepeat_ValueChanged(sender, e)
+
+    My.Settings.TimeRepeat = TxtRepeat.Value
+    My.Settings.TimeDelay = TxtDelay.Value
+    My.Settings.TimeLong = TxtLong.Value
 
     'MsgBox(My.Settings.TimeDelay)
 
@@ -482,5 +485,9 @@ Public Class Form1
         My.Settings.Reset()
         Me.Close()
     End Select
+  End Sub
+
+  Private Sub VideoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VideoToolStripMenuItem.Click
+    Process.Start("https://youtu.be/-x2LvvU0K5g")
   End Sub
 End Class

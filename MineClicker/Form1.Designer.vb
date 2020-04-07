@@ -243,25 +243,25 @@ Partial Class Form1
         '
         Me.TutorialToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TextToolStripMenuItem, Me.VideoToolStripMenuItem})
         Me.TutorialToolStripMenuItem.Name = "TutorialToolStripMenuItem"
-        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
+        Me.TutorialToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.TutorialToolStripMenuItem.Text = "T&utorial"
         '
         'TextToolStripMenuItem
         '
         Me.TextToolStripMenuItem.Name = "TextToolStripMenuItem"
-        Me.TextToolStripMenuItem.Size = New System.Drawing.Size(104, 22)
+        Me.TextToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.TextToolStripMenuItem.Text = "&Text"
         '
         'VideoToolStripMenuItem
         '
         Me.VideoToolStripMenuItem.Name = "VideoToolStripMenuItem"
-        Me.VideoToolStripMenuItem.Size = New System.Drawing.Size(104, 22)
+        Me.VideoToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.VideoToolStripMenuItem.Text = "&Video"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AboutToolStripMenuItem.Text = "&About"
         '
         'NotifyIcon1
