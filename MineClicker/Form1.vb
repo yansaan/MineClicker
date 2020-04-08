@@ -490,4 +490,8 @@ Public Class Form1
   Private Sub VideoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VideoToolStripMenuItem.Click
     Process.Start("https://youtu.be/-x2LvvU0K5g")
   End Sub
+
+  Private Sub TextToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TextToolStripMenuItem.Click
+    Process.Start("https://github.com/yansaan/MineClicker/wiki")
+  End Sub
 End Class

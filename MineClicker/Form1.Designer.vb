@@ -250,7 +250,7 @@ Partial Class Form1
         '
         Me.TextToolStripMenuItem.Name = "TextToolStripMenuItem"
         Me.TextToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.TextToolStripMenuItem.Text = "&Text"
+        Me.TextToolStripMenuItem.Text = "&Wiki"
         '
         'VideoToolStripMenuItem
         '
