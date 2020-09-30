@@ -1,7 +1,7 @@
 ﻿Public Class FrmAbout
   Private Sub FrmAbout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     TopAbout()
-    NameProduct.Text = My.Application.Info.ProductName
+    NameProduct.Text = String.Format("{0} ({1}{2})", My.Computer.Name, "name", "")
     LblVer.Text = String.Format("Ver. {0}.{1}a", My.Application.Info.Version.Major.ToString, My.Application.Info.Version.Minor.ToString)
     Copyright.Text = My.Application.Info.Copyright
   End Sub

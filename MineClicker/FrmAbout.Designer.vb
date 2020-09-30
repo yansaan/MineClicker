@@ -100,7 +100,7 @@ Partial Class FrmAbout
         'Copyright
         '
         Me.Copyright.AutoSize = True
-        Me.Copyright.Location = New System.Drawing.Point(23, 56)
+        Me.Copyright.Location = New System.Drawing.Point(16, 37)
         Me.Copyright.Name = "Copyright"
         Me.Copyright.Size = New System.Drawing.Size(39, 13)
         Me.Copyright.TabIndex = 0
@@ -109,7 +109,7 @@ Partial Class FrmAbout
         'LblVer
         '
         Me.LblVer.AutoSize = True
-        Me.LblVer.Location = New System.Drawing.Point(23, 39)
+        Me.LblVer.Location = New System.Drawing.Point(16, 20)
         Me.LblVer.Name = "LblVer"
         Me.LblVer.Size = New System.Drawing.Size(39, 13)
         Me.LblVer.TabIndex = 0
@@ -118,7 +118,7 @@ Partial Class FrmAbout
         'NameProduct
         '
         Me.NameProduct.AutoSize = True
-        Me.NameProduct.Location = New System.Drawing.Point(23, 21)
+        Me.NameProduct.Location = New System.Drawing.Point(16, 61)
         Me.NameProduct.Name = "NameProduct"
         Me.NameProduct.Size = New System.Drawing.Size(28, 13)
         Me.NameProduct.TabIndex = 0
