@@ -8,8 +8,8 @@ Mineclicker now change to [MyClicker](http://github.com/yansaan/myclicker) with 
 
 # MineClicker
 
-| [Download Latest](https://github.com/ianpwk/MineClicker/releases/latest/download/MineClickerBeta.zip)  | [Tutorial](https://github.com/yansaan/MineClicker#how-to-use) | [Website](https://yansaan.carrd.co/#mineclicker) | [Video Tutorial](https://www.youtube.com/watch?v=-x2LvvU0K5g)
-| ------------- | ------------- | ------------- | ------------- |
+| [Download Latest](https://github.com/ianpwk/MineClicker/releases/latest/download/MineClickerBeta.zip)  | [Tutorial](https://github.com/yansaan/MineClicker/wiki)  | [Video Tutorial](https://www.youtube.com/watch?v=-x2LvvU0K5g)
+| ------------ | ------------- | ------------- |
 
 ## Introducion
 
