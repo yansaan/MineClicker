@@ -364,6 +364,8 @@ Public Class Form1
     LeftFuncion.Enabled = False
     milLong = False
     repeatEnabled = False
+    mouse_event(&H4, 0, 0, 0, 1)
+    mouse_event(&H10, 0, 0, 0, 1)
   End Sub
 
   Private Sub Clicked()
@@ -427,30 +429,34 @@ Public Class Form1
   End Sub
 
   Private Sub LeftFuncion_Tick(sender As Object, e As EventArgs) Handles LeftFuncion.Tick
-    Select Case secBreak
-      Case 0
-        mouse_event(&H4, 0, 0, 0, 1)
-        LeftFuncion.Enabled = False
-        Select Case repeatEnabled
-          Case False
-            DelayRunning.Enabled = True
-          Case True
-            Select Case Repeat
-              Case 0
-                Disabled()
-              Case Else
-                Repeat -= 1
-                DelayRunning.Enabled = True
-            End Select
-        End Select
-      Case 1
-        secBreak -= 1
-        If milLong = True Then
-          LeftFuncion.Interval = MilVal * 100
-        End If
-      Case Else
-        secBreak -= 1
-    End Select
+    If Clickers = True Then
+      Select Case secBreak
+        Case 0
+          mouse_event(&H4, 0, 0, 0, 1)
+          LeftFuncion.Enabled = False
+          Select Case repeatEnabled
+            Case False
+              DelayRunning.Enabled = True
+            Case True
+              Select Case Repeat
+                Case 0
+                  Disabled()
+                Case Else
+                  Repeat -= 1
+                  DelayRunning.Enabled = True
+              End Select
+          End Select
+        Case 1
+          secBreak -= 1
+          If milLong = True Then
+            LeftFuncion.Interval = MilVal * 100
+          End If
+        Case Else
+          secBreak -= 1
+      End Select
+    Else
+      mouse_event(&H4, 0, 0, 0, 1)
+    End If
   End Sub
 
   Private Sub DelayRunning_Tick(sender As Object, e As EventArgs) Handles DelayRunning.Tick

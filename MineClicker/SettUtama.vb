@@ -29,18 +29,6 @@ Public Class SettUtama
       CheckBox2.Checked = True
     End If
     makeSoutcut()
-
-    ListBox1.Items.Clear()
-    KeyExperimental()
-  End Sub
-
-  Private Sub KeyExperimental()
-    ' Disabled MineClicker
-    ' Change Interval 50
-    ' Change Interval 100
-    ' Change Repeat
-    CheckBox5.Enabled = False
-    GroupBox2.Enabled = False
   End Sub
 
   Sub makeSoutcut()
